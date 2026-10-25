@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: splitmate-config
+  labels:
+    app.kubernetes.io/name: splitmate
+    app.kubernetes.io/part-of: splitmate-expense-portal
+data:
+  NODE_ENV: "production"
+  PORT: "5000"
+  REDIS_HOST: "splitmate-redis"
+  REDIS_PORT: "6379"
+  DEFAULT_CURRENCY: "INR"
+  FRONTEND_URL: "http://localhost:3000"

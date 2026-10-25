@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SplitMate — All Expenses</title>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#e8ffef",
+            "on-tertiary-container": "#aebcaa",
+            "surface-container-high": "#c9f2d9",
+            "on-secondary-fixed-variant": "#504700",
+            "surface-dim": "#bbe3cb",
+            "secondary-container": "#f8e136",
+            "on-surface": "#002113",
+            "surface-container-lowest": "#ffffff",
+            "tertiary": "#293528",
+            "tertiary-fixed": "#d9e7d4",
+            "error": "#ba1a1a",
+            "on-primary-container": "#87c695",
+            "on-tertiary-fixed-variant": "#3e4a3c",
+            "secondary": "#6a5f00",
+            "tertiary-container": "#404c3e",
+            "surface-container-low": "#d4fde4",
+            "outline-variant": "#c0c9be",
+            "on-primary-fixed-variant": "#12512c",
+            "primary-fixed": "#b1f2be",
+            "tertiary-fixed-dim": "#bdcab8",
+            "inverse-primary": "#96d5a3",
+            "on-primary-fixed": "#00210d",
+            "on-tertiary-fixed": "#131e13",
+            "surface-container-highest": "#c4ecd3",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#96d5a3",
+            "secondary-fixed": "#fbe439",
+            "on-surface-variant": "#404941",
+            "primary": "#003b1b",
+            "inverse-surface": "#123726",
+            "inverse-on-surface": "#d2fae1",
+            "background": "#e8ffef",
+            "primary-container": "#14532d",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "surface": "#e8ffef",
+            "surface-variant": "#c4ecd3",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#201c00",
+            "surface-tint": "#2e6a41",
+            "outline": "#717970",
+            "on-secondary-container": "#6f6300",
+            "on-error-container": "#93000a",
+            "surface-container": "#cff7de",
+            "secondary-fixed-dim": "#ddc815",
+            "on-background": "#002113",
+            "error-container": "#ffdad6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.25rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "margin": "1.5rem"
+          },
+          "fontFamily": {
+            "currency-sm": ["Manrope"],
+            "currency-display": ["Manrope"],
+            "display-lg-mobile": ["Manrope"],
+            "headline-md": ["Manrope"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-sm": ["Manrope"],
+            "label-md": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "display-lg": ["Manrope"],
+            "label-lg": ["Manrope"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "currency-sm": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+            "currency-display": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    /* Subtle warm ambient tint shadow */
+    .forest-card-shadow {
+      box-shadow: 0 4px 16px rgba(20, 83, 45, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c0c9be;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-surface-bright text-on-surface font-body-md antialiased min-h-full flex flex-col selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- ========================================================================= -->
+<!-- 1. PERSISTENT SIDEBAR NAVIGATION (Shared Components Anchor: SideNavBar)    -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-60 z-30 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant dark:border-outline shadow-sm dark:shadow-none hidden lg:block">
+<div class="flex flex-col justify-between h-full p-4">
+<!-- Top Section: Brand Identity & Primary Nav Links -->
+<div class="space-y-6">
+<!-- Logo Header -->
+<div class="flex items-center gap-3 px-2 pt-1">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-secondary-container shadow-sm">
+<span class="material-symbols-outlined fill text-2xl" data-icon="handshake">handshake</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md text-primary dark:text-inverse-primary font-bold tracking-tight leading-none">SplitMate</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5 font-medium">Split Bills. Stay Friends.</p>
+</div>
+</div>
+<!-- Main Navigation Items -->
+<nav class="space-y-1">
+<!-- 1. Dashboard -->
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-lg font-label-lg">Dashboard</span>
+</a>
+<!-- 2. My Groups -->
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-label-lg font-label-lg">My Groups</span>
+</a>
+<!-- 3. All Expenses (ACTIVE) -->
+<a aria-current="page" class="bg-secondary-container text-on-secondary-container font-semibold rounded-xl px-3 py-2 flex items-center gap-3 border border-outline-variant shadow-sm active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined fill" data-icon="receipt_long">receipt_long</span>
+<span class="text-label-lg font-label-lg font-bold">All Expenses</span>
+</a>
+<!-- 4. Balances -->
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-label-lg font-label-lg">Balances</span>
+</a>
+<!-- 5. Settlements -->
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+<span class="text-label-lg font-label-lg">Settlements</span>
+</a>
+<!-- 6. Insights -->
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-label-lg font-label-lg">Insights</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Section: Footer Navigation & User Card -->
+<div class="space-y-4 pt-4 border-t border-outline-variant">
+<nav class="space-y-1">
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-label-lg font-label-lg">Help &amp; Support</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-lg font-label-lg">Settings</span>
+</a>
+</nav>
+<!-- Current User Profile Pill -->
+<div class="bg-surface-container-high p-2.5 rounded-2xl flex items-center justify-between border border-outline-variant">
+<div class="flex items-center gap-2.5">
+<img class="w-9 h-9 rounded-full object-cover border-2 border-surface-container-lowest" data-alt="A refined portrait of Alex Morgan, a friendly young adult professional in casual knitwear smiling warmly, set against an artistic architectural interior with lush botanical plants, soft natural daylighting, and modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWq0-f1_YDwLMnRug6ZeKi4WAwFzMzxrFvL7EsKjoLIh8eyur__0DnNasesXDS2amV8jex4wk80PeL1KYb9TfmFga07Gyex5xbFY_HLansAbiWIBKHIB3-qCYMMaxj9JdwpMZtwskCguuN70sZQx3NH_TYOkrRn6mYxfHWrpOIFgNv2tjF3gKoPZ9sgqd9Bjy9_IHs4vScoQOGHbapSoR6NOvOrPHTIKFm-1U_T8QGmknsCgsG_QadTg"/>
+<div class="min-w-0">
+<p class="text-label-lg font-label-lg text-primary truncate leading-tight">Alex Morgan</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant truncate">alex@splitmate.io</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-lg" data-icon="unfold_more">unfold_more</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- 2. TOP APP BAR (Shared Components Anchor: TopNavBar)                       -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 right-0 left-0 lg:left-60 h-16 z-20 bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm flex items-center justify-between px-6 transition-all">
+<!-- Breadcrumb + Left Search Bar Area -->
+<div class="flex items-center gap-6 flex-1 max-w-xl">
+<div class="hidden sm:flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant">
+<span>Pages</span>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<span class="font-bold text-primary">All Expenses</span>
+</div>
+<!-- Live Search Input -->
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-xl" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-xl border border-outline-variant bg-surface-bright text-body-md font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-2 focus:ring-secondary-container focus:outline-none transition-all" placeholder="Search expenses by note, merchant, friend..." type="text"/>
+</div>
+</div>
+<!-- Right Actions: Notifications & Primary CTA -->
+<div class="flex items-center gap-3">
+<!-- Notification Icon with Badge -->
+<button class="relative p-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-2xl" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+</button>
+<!-- Contextual Quick Action CTA -->
+<button class="h-10 px-4 rounded-xl bg-secondary-container hover:bg-secondary-fixed text-primary font-label-lg text-label-lg font-bold border border-outline-variant flex items-center gap-1.5 shadow-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg font-bold" data-icon="add">add</span>
+<span>+ Add Expense</span>
+</button>
+<!-- Profile Avatar Thumbnail (Mobile & Quick Toggle) -->
+<div class="lg:hidden pl-2 border-l border-outline-variant">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A polished modern portrait photo of Alex Morgan in natural warm lighting smiling in a serene cafe setting, framed with minimal styling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrq6k55s3ueJ7ZIUSw9Fee8sQPLvn52B6NiyWDd-rMMII0GgT8TwKh9VSl1CjVscWGcAlVfDnWK80agbBqp5eLO3Ic7Lw7-XmRuh8FFU2Jo-ZZJdU5_Pj_A4iDR0AbeG9lYqeiv5jdDGsXpt5UCStcRiJr8bPMXMZ61YwAGbBMyvCpzjQ13hWEpYxH-qCQ09W5t4pMRpGbuoqvlOGHkzZqGP5FTLcfi79WYCuz3vmVEPOj3TIVij4YFg"/>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- 3. MAIN LEDGER CANVAS & CONTENT                                           -->
+<!-- ========================================================================= -->
+<main class="lg:ml-60 pt-20 pb-16 px-4 sm:px-6 lg:px-8 max-w-[1440px] w-full mx-auto flex-1 flex flex-col gap-6">
+<!-- Section A: Ledger Header & Summary Metrics -->
+<div class="space-y-6">
+<!-- Title Bar with Badge & Quick Ledger Utilities -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-3">
+<h2 class="text-headline-lg font-headline-lg text-primary tracking-tight">All Expenses</h2>
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-md text-label-md font-semibold border border-outline-variant flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+              Showing 34 transactions
+            </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">
+            A complete unified ledger of all shared costs, splits, and settlement records across all your groups and friends.
+          </p>
+</div>
+<!-- Top Right Action Utilities -->
+<div class="flex items-center gap-2.5">
+<button class="h-10 px-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-lg text-label-lg flex items-center gap-2 transition-colors active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+<span>Export CSV / PDF</span>
+</button>
+<button class="h-10 px-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-high text-on-surface font-label-lg text-label-lg flex items-center gap-2 transition-colors active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="document_scanner">document_scanner</span>
+<span>Receipt Scanner</span>
+</button>
+</div>
+</div>
+<!-- Top 4 Metric Mini-Cards (Bento Ledger Stats) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<!-- Metric Card 1: Total Spent -->
+<div class="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant forest-card-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant">Total Spent Across Groups</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="payments">payments</span>
+</div>
+</div>
+<div class="mt-3">
+<div class="text-currency-display font-currency-display text-primary">₹48,920.00</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">All recorded expenses</p>
+</div>
+</div>
+<!-- Metric Card 2: Your Total Share -->
+<div class="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant forest-card-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant">Your Total Share</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="pie_chart">pie_chart</span>
+</div>
+</div>
+<div class="mt-3">
+<div class="text-currency-display font-currency-display text-primary">₹14,840.00</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">What you personally owe/paid</p>
+</div>
+</div>
+<!-- Metric Card 3: Paid by You (Green highlight banner) -->
+<div class="bg-surface-container-lowest rounded-2xl p-5 border-2 border-primary-container forest-card-shadow flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-2 -bottom-2 w-16 h-16 rounded-full bg-secondary-container/20 -z-0"></div>
+<div class="flex items-center justify-between z-10">
+<span class="text-label-md font-label-md font-bold text-primary-container">Paid by You</span>
+<div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg fill" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<div class="mt-3 z-10">
+<div class="text-currency-display font-currency-display text-primary-container">₹21,300.00</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="text-body-sm font-body-sm font-bold text-primary-container">₹6,460.00</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">lent out to friends</span>
+</div>
+</div>
+</div>
+<!-- Metric Card 4: Average Split -->
+<div class="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant forest-card-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant">Average Split</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="calculate">calculate</span>
+</div>
+</div>
+<div class="mt-3">
+<div class="text-currency-display font-currency-display text-primary">₹1,438.00</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Per transaction average</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section B: Comprehensive Filter & Search Toolbar -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 sm:p-5 border border-outline-variant forest-card-shadow space-y-4">
+<!-- Upper Toolbar: Dropdowns & Date Selector -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3 items-center">
+<!-- Filter Search -->
+<div class="relative lg:col-span-2">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="filter_list">filter_list</span>
+<input class="w-full h-11 pl-9 pr-3 rounded-xl border border-outline-variant bg-surface-bright text-body-md font-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-secondary-container focus:outline-none" placeholder="Filter expenses..." type="text"/>
+</div>
+<!-- Group Selector -->
+<div>
+<select class="w-full h-11 px-3 rounded-xl border border-outline-variant bg-surface-bright text-body-md font-body-md text-on-surface focus:border-primary focus:outline-none">
+<option selected="">All Groups (5)</option>
+<option>🌴 Goa Trip</option>
+<option>🏠 Flatmates #402</option>
+<option>☕ Weekend Hangouts</option>
+<option>🎓 College Reunion</option>
+<option>🎲 Friday Boardgamers</option>
+</select>
+</div>
+<!-- Category Filter -->
+<div>
+<select class="w-full h-11 px-3 rounded-xl border border-outline-variant bg-surface-bright text-body-md font-body-md text-on-surface focus:border-primary focus:outline-none">
+<option selected="">All Categories</option>
+<option>🍽️ Food &amp; Dining</option>
+<option>🚕 Transport</option>
+<option>🏨 Stay &amp; Hotel</option>
+<option>🛒 Groceries</option>
+<option>🍿 Entertainment</option>
+<option>💡 Utilities</option>
+</select>
+</div>
+<!-- Payer Filter -->
+<div>
+<select class="w-full h-11 px-3 rounded-xl border border-outline-variant bg-surface-bright text-body-md font-body-md text-on-surface focus:border-primary focus:outline-none">
+<option selected="">Paid by: Anyone</option>
+<option>Alex (You)</option>
+<option>Maya Sen</option>
+<option>Rahul Verma</option>
+<option>Sam Wilson</option>
+<option>Priya Patel</option>
+</select>
+</div>
+<!-- Date Range Filter -->
+<div>
+<div class="flex items-center justify-between h-11 px-3 rounded-xl border border-outline-variant bg-surface-bright text-body-sm font-body-sm text-on-surface cursor-pointer hover:border-outline transition-colors">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-outline text-lg" data-icon="calendar_today">calendar_today</span>
+<span class="font-medium truncate">Oct 1 – Oct 31, 2024</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Lower Toolbar: Quick Filter Pills & Sort Dropdown -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-outline-variant">
+<!-- Filter Pills -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 custom-scrollbar">
+<button class="px-3.5 py-1.5 rounded-full bg-primary-container text-surface-container-lowest font-label-md text-label-md font-semibold whitespace-nowrap active:scale-95 transition-all">
+            All (34)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-bright hover:bg-surface-container-high border border-outline-variant text-on-surface font-label-md text-label-md font-medium whitespace-nowrap active:scale-95 transition-all">
+            Paid by Me (12)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-bright hover:bg-surface-container-high border border-outline-variant text-on-surface font-label-md text-label-md font-medium whitespace-nowrap active:scale-95 transition-all">
+            Involved Only (28)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-bright hover:bg-surface-container-high border border-outline-variant text-on-surface font-label-md text-label-md font-medium whitespace-nowrap active:scale-95 transition-all">
+            Pending Settlement (4)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-bright hover:bg-surface-container-high border border-outline-variant text-on-surface font-label-md text-label-md font-medium whitespace-nowrap active:scale-95 transition-all">
+            Receipts Attached (18)
+          </button>
+</div>
+<!-- Sorting -->
+<div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
+<span class="text-body-sm font-body-sm text-outline hidden md:inline">Sort by:</span>
+<select class="h-9 px-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-label-md font-label-md text-on-surface focus:border-primary focus:outline-none">
+<option selected="">Newest first</option>
+<option>Oldest first</option>
+<option>Highest Amount</option>
+<option>Your Highest Share</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Section C: High-Fidelity All Expenses Data Table & Ledger -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant forest-card-shadow overflow-hidden">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<!-- Table Header -->
+<thead>
+<tr class="border-b border-outline-variant bg-surface-bright text-label-md font-label-md text-on-surface-variant">
+<th class="py-3.5 px-4 font-bold" scope="col">
+<input class="rounded border-outline text-primary-container focus:ring-secondary-container w-4 h-4" type="checkbox"/>
+</th>
+<th class="py-3.5 px-4 font-bold" scope="col">Date &amp; Status</th>
+<th class="py-3.5 px-4 font-bold" scope="col">Expense &amp; Category</th>
+<th class="py-3.5 px-4 font-bold" scope="col">Group</th>
+<th class="py-3.5 px-4 font-bold" scope="col">Paid By</th>
+<th class="py-3.5 px-4 font-bold" scope="col">Total Amount</th>
+<th class="py-3.5 px-4 font-bold" scope="col">Split Type</th>
+<th class="py-3.5 px-4 font-bold" scope="col">Your Impact</th>
+<th class="py-3.5 px-4 font-bold text-center" scope="col">Actions</th>
+</tr>
+</thead>
+<!-- Table Body Rows -->
+<tbody class="divide-y divide-outline-variant text-body-md font-body-md">
+<!-- Row 1: Fisherman's Wharf Seafood Feast -->
+<tr class="hover:bg-surface-bright/60 transition-colors group">
+<td class="py-4 px-4">
+<input class="rounded border-outline text-primary-container focus:ring-secondary-container w-4 h-4" type="checkbox"/>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-on-surface">Oct 24, 2024</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified" title="Verified Transaction">verified</span>
+</div>
+<div class="text-body-sm font-body-sm text-outline">8:30 PM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-base" data-icon="restaurant">restaurant</span>
+</div>
+<div class="min-w-0">
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors truncate">Fisherman's Wharf Seafood Feast</p>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Food &amp; Dining</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-0.5 text-primary" title="Receipt Attached">
+<span class="material-symbols-outlined text-xs" data-icon="receipt">receipt</span> 1 Receipt
+                      </span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-bright text-primary border border-outline-variant font-label-md text-label-md">
+<span>🌴</span> Goa Trip
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-xs font-bold text-primary border border-outline-variant">
+                    AM
+                  </div>
+<span class="font-semibold text-primary">Alex (You)</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap font-currency-sm text-currency-sm text-on-surface">
+                ₹4,200.00
+              </td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-lg bg-surface-bright text-on-surface-variant text-body-sm font-body-sm border border-outline-variant">
+                  Split equally (4)
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-currency-sm font-currency-sm text-primary-container">+₹3,150.00</div>
+<span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-surface-container-high text-primary-container mt-0.5">
+                  You lent ₹3,150
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<div class="flex items-center justify-center gap-1 text-outline">
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors" title="View Details">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors" title="More">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Airtel Fiber & Electricity Bill -->
+<tr class="hover:bg-surface-bright/60 transition-colors group">
+<td class="py-4 px-4">
+<input class="rounded border-outline text-primary-container focus:ring-secondary-container w-4 h-4" type="checkbox"/>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-on-surface">Oct 23, 2024</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified">verified</span>
+</div>
+<div class="text-body-sm font-body-sm text-outline">2:15 PM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-base" data-icon="bolt">bolt</span>
+</div>
+<div class="min-w-0">
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors truncate">Airtel Fiber &amp; Electricity Bill</p>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Utilities</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-0.5 text-primary">
+<span class="material-symbols-outlined text-xs" data-icon="attachment">attachment</span> PDF Invoice
+                      </span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-bright text-primary border border-outline-variant font-label-md text-label-md">
+<span>🏠</span> Flatmates #402
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-tertiary-fixed flex items-center justify-center text-xs font-bold text-tertiary">
+                    MS
+                  </div>
+<span class="text-on-surface">Maya Sen</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap font-currency-sm text-currency-sm text-on-surface">
+                ₹2,250.00
+              </td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-lg bg-surface-bright text-on-surface-variant text-body-sm font-body-sm border border-outline-variant">
+                  Split equally (3)
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-currency-sm font-currency-sm text-error">-₹750.00</div>
+<span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-error-container text-error mt-0.5">
+                  You owe ₹750
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<div class="flex items-center justify-center gap-1 text-outline">
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Vagator Beach Villa Booking -->
+<tr class="hover:bg-surface-bright/60 transition-colors group">
+<td class="py-4 px-4">
+<input class="rounded border-outline text-primary-container focus:ring-secondary-container w-4 h-4" type="checkbox"/>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-on-surface">Oct 21, 2024</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified">verified</span>
+</div>
+<div class="text-body-sm font-body-sm text-outline">11:00 AM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-base" data-icon="hotel">hotel</span>
+</div>
+<div class="min-w-0">
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors truncate">Vagator Beach Villa Booking</p>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Stay</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-0.5 text-primary">
+<span class="material-symbols-outlined text-xs" data-icon="receipt">receipt</span> Airbnb Booking
+                      </span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-bright text-primary border border-outline-variant font-label-md text-label-md">
+<span>🌴</span> Goa Trip
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-xs font-bold text-on-surface">
+                    RV
+                  </div>
+<span class="text-on-surface">Rahul Verma</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap font-currency-sm text-currency-sm text-on-surface">
+                ₹9,500.00
+              </td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-lg bg-surface-bright text-on-surface-variant text-body-sm font-body-sm border border-outline-variant">
+                  Split equally (5)
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-currency-sm font-currency-sm text-error">-₹1,900.00</div>
+<span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-error-container text-error mt-0.5">
+                  You owe ₹1,900
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<div class="flex items-center justify-center gap-1 text-outline">
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Whole Foods Weekly Groceries -->
+<tr class="hover:bg-surface-bright/60 transition-colors group">
+<td class="py-4 px-4">
+<input class="rounded border-outline text-primary-container focus:ring-secondary-container w-4 h-4" type="checkbox"/>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-on-surface">Oct 19, 2024</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified">verified</span>
+</div>
+<div class="text-body-sm font-body-sm text-outline">6:45 PM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-base" data-icon="shopping_basket">shopping_basket</span>
+</div>
+<div class="min-w-0">
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors truncate">Whole Foods Weekly Groceries</p>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Groceries</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-0.5 text-primary">
+<span class="material-symbols-outlined text-xs" data-icon="receipt">receipt</span> Supermarket Slip
+                      </span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-bright text-primary border border-outline-variant font-label-md text-label-md">
+<span>🏠</span> Flatmates #402
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-xs font-bold text-primary border border-outline-variant">
+                    AM
+                  </div>
+<span class="font-semibold text-primary">Alex (You)</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap font-currency-sm text-currency-sm text-on-surface">
+                ₹3,400.00
+              </td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-lg bg-surface-bright text-on-surface-variant text-body-sm font-body-sm border border-outline-variant">
+                  Split equally (3)
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-currency-sm font-currency-sm text-primary-container">+₹2,266.67</div>
+<span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-surface-container-high text-primary-container mt-0.5">
+                  You lent ₹2,266.67
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<div class="flex items-center justify-center gap-1 text-outline">
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Scooter Rentals (3 days) -->
+<tr class="hover:bg-surface-bright/60 transition-colors group">
+<td class="py-4 px-4">
+<input class="rounded border-outline text-primary-container focus:ring-secondary-container w-4 h-4" type="checkbox"/>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-on-surface">Oct 18, 2024</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified">verified</span>
+</div>
+<div class="text-body-sm font-body-sm text-outline">10:00 AM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-base" data-icon="two_wheeler">two_wheeler</span>
+</div>
+<div class="min-w-0">
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors truncate">Scooter Rentals (3 days)</p>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Transport</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-outline">No receipt</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-bright text-primary border border-outline-variant font-label-md text-label-md">
+<span>🌴</span> Goa Trip
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-dim flex items-center justify-center text-xs font-bold text-on-surface">
+                    SW
+                  </div>
+<span class="text-on-surface">Sam Wilson</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap font-currency-sm text-currency-sm text-on-surface">
+                ₹3,600.00
+              </td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-lg bg-surface-bright text-on-surface-variant text-body-sm font-body-sm border border-outline-variant">
+                  Custom split (4)
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-currency-sm font-currency-sm text-error">-₹900.00</div>
+<span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-error-container text-error mt-0.5">
+                  You owe ₹900
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<div class="flex items-center justify-center gap-1 text-outline">
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Coldplay Concert VIP Passes -->
+<tr class="hover:bg-surface-bright/60 transition-colors group">
+<td class="py-4 px-4">
+<input class="rounded border-outline text-primary-container focus:ring-secondary-container w-4 h-4" type="checkbox"/>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-on-surface">Oct 15, 2024</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified">verified</span>
+</div>
+<div class="text-body-sm font-body-sm text-outline">4:00 PM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-base" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<div class="min-w-0">
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors truncate">Coldplay Concert VIP Passes</p>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Entertainment</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-0.5 text-primary">
+<span class="material-symbols-outlined text-xs" data-icon="receipt">receipt</span> BookMyShow
+                      </span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-bright text-primary border border-outline-variant font-label-md text-label-md">
+<span>☕</span> Weekend Hangouts
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-fixed flex items-center justify-center text-xs font-bold text-on-secondary-fixed">
+                    PP
+                  </div>
+<span class="text-on-surface">Priya Patel</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap font-currency-sm text-currency-sm text-on-surface">
+                ₹12,000.00
+              </td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-lg bg-surface-bright text-on-surface-variant text-body-sm font-body-sm border border-outline-variant">
+                  Split equally (4)
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-currency-sm font-currency-sm text-error">-₹3,000.00</div>
+<span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-error-container text-error mt-0.5">
+                  You owe ₹3,000
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<div class="flex items-center justify-center gap-1 text-outline">
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 7: Uber XL to Dabolim Airport -->
+<tr class="hover:bg-surface-bright/60 transition-colors group">
+<td class="py-4 px-4">
+<input class="rounded border-outline text-primary-container focus:ring-secondary-container w-4 h-4" type="checkbox"/>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-on-surface">Oct 12, 2024</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified">verified</span>
+</div>
+<div class="text-body-sm font-body-sm text-outline">5:15 AM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-base" data-icon="local_taxi">local_taxi</span>
+</div>
+<div class="min-w-0">
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors truncate">Uber XL to Dabolim Airport</p>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Transport</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-0.5 text-primary">
+<span class="material-symbols-outlined text-xs" data-icon="receipt">receipt</span> Uber Invoice
+                      </span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-bright text-primary border border-outline-variant font-label-md text-label-md">
+<span>🌴</span> Goa Trip
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-xs font-bold text-primary border border-outline-variant">
+                    AM
+                  </div>
+<span class="font-semibold text-primary">Alex (You)</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap font-currency-sm text-currency-sm text-on-surface">
+                ₹1,650.00
+              </td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-lg bg-surface-bright text-on-surface-variant text-body-sm font-body-sm border border-outline-variant">
+                  Split equally (3)
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-currency-sm font-currency-sm text-primary-container">+₹1,100.00</div>
+<span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-surface-container-high text-primary-container mt-0.5">
+                  You lent ₹1,100
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<div class="flex items-center justify-center gap-1 text-outline">
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 8: Board Game Cafe & Snacks -->
+<tr class="hover:bg-surface-bright/60 transition-colors group">
+<td class="py-4 px-4">
+<input class="rounded border-outline text-primary-container focus:ring-secondary-container w-4 h-4" type="checkbox"/>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-on-surface">Oct 06, 2024</span>
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified">verified</span>
+</div>
+<div class="text-body-sm font-body-sm text-outline">7:10 PM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-base" data-icon="sports_esports">sports_esports</span>
+</div>
+<div class="min-w-0">
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors truncate">Board Game Cafe &amp; Snacks</p>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Entertainment</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-outline">No receipt</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-bright text-primary border border-outline-variant font-label-md text-label-md">
+<span>🎲</span> Friday Boardgamers
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-xs font-bold text-on-surface">
+                    RM
+                  </div>
+<span class="text-on-surface">Rohan Mehta</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap font-currency-sm text-currency-sm text-on-surface">
+                ₹1,800.00
+              </td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-lg bg-surface-bright text-on-surface-variant text-body-sm font-body-sm border border-outline-variant">
+                  Split equally (6)
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-currency-sm font-currency-sm text-error">-₹300.00</div>
+<span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-error-container text-error mt-0.5">
+                  You owe ₹300
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<div class="flex items-center justify-center gap-1 text-outline">
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Section D: Table Pagination & Bottom Bar -->
+<div class="p-4 sm:p-5 border-t border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-4 bg-surface-bright/40">
+<!-- Counter and Micro-prompt -->
+<div class="flex flex-col sm:flex-row sm:items-center gap-3">
+<span class="text-body-sm font-body-sm text-on-surface-variant">
+            Showing <strong class="text-on-surface font-semibold">1–8</strong> of <strong class="text-on-surface font-semibold">34</strong> expenses
+          </span>
+<span class="hidden sm:inline text-outline-variant">•</span>
+<span class="text-body-sm font-body-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="check_box">check_box</span>
+            Select multiple to export or settle in batch
+          </span>
+</div>
+<!-- Numeric Pagination Controls -->
+<div class="flex items-center gap-1.5 self-center">
+<!-- Prev Button -->
+<button class="px-3 py-1.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-high font-label-md text-label-md flex items-center gap-1 disabled:opacity-40 transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="chevron_left">chevron_left</span>
+<span class="hidden sm:inline">Prev</span>
+</button>
+<!-- Active Page 1 -->
+<button class="w-9 h-9 rounded-xl bg-primary-container text-surface-container-lowest font-bold text-label-md flex items-center justify-center shadow-sm">
+            1
+          </button>
+<!-- Page 2 -->
+<button class="w-9 h-9 rounded-xl bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-high font-semibold text-label-md flex items-center justify-center transition-colors">
+            2
+          </button>
+<!-- Page 3 -->
+<button class="w-9 h-9 rounded-xl bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-high font-semibold text-label-md flex items-center justify-center transition-colors">
+            3
+          </button>
+<span class="px-1 text-outline">...</span>
+<!-- Page 5 -->
+<button class="w-9 h-9 rounded-xl bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-high font-semibold text-label-md flex items-center justify-center transition-colors">
+            5
+          </button>
+<!-- Next Button -->
+<button class="px-3 py-1.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-label-md text-label-md flex items-center gap-1 transition-colors">
+<span class="hidden sm:inline">Next</span>
+<span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Friendly Microcopy Tip Box -->
+<div class="rounded-2xl p-4 bg-surface-container-high/60 border border-outline-variant flex items-start sm:items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0 text-base shadow-sm">
+        💡
+      </div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+<strong class="text-primary font-bold">SplitMate Ledger Tip:</strong> Click on any expense row to inspect high-resolution receipt images, audit exact itemized breakdowns, reassign individual friend contributions, or export single-entry receipts.
+      </p>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- 4. MOBILE BOTTOM NAVIGATION (Responsive Anchor Pivot)                     -->
+<!-- ========================================================================= -->
+<nav class="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant z-30 flex items-center justify-around px-2 shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary py-1 px-2" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="text-body-sm font-body-sm text-xs mt-0.5">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary py-1 px-2" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="group">group</span>
+<span class="text-body-sm font-body-sm text-xs mt-0.5">Groups</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold py-1 px-3 bg-secondary-container/40 rounded-xl" href="#">
+<span class="material-symbols-outlined text-xl fill" data-icon="receipt_long">receipt_long</span>
+<span class="text-body-sm font-body-sm text-xs mt-0.5">Expenses</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary py-1 px-2" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-body-sm font-body-sm text-xs mt-0.5">Balances</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary py-1 px-2" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="analytics">analytics</span>
+<span class="text-body-sm font-body-sm text-xs mt-0.5">Insights</span>
+</a>
+</nav>
+</body></html>

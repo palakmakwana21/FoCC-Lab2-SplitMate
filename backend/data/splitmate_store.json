@@ -1,0 +1,490 @@
+{
+  "users": [
+    {
+      "id": "usr_alex",
+      "name": "Alex Morgan",
+      "email": "alex@splitmate.io",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+      "initials": "AM",
+      "color": "#14532D",
+      "isCurrentUser": true
+    },
+    {
+      "id": "usr_maya",
+      "name": "Maya Sen",
+      "email": "maya.sen@gmail.com",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
+      "initials": "MS",
+      "color": "#F59E0B"
+    },
+    {
+      "id": "usr_rahul",
+      "name": "Rahul Verma",
+      "email": "rahul.v@outlook.com",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+      "initials": "RV",
+      "color": "#21864A"
+    },
+    {
+      "id": "usr_sam",
+      "name": "Sam Wilson",
+      "email": "sam.w@gmail.com",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",
+      "initials": "SW",
+      "color": "#3B82F6"
+    },
+    {
+      "id": "usr_priya",
+      "name": "Priya Patel",
+      "email": "priya.patel@gmail.com",
+      "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80",
+      "initials": "PP",
+      "color": "#8B5CF6"
+    },
+    {
+      "id": "usr_rohan",
+      "name": "Rohan Mehta",
+      "email": "rohan.m@gmail.com",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
+      "initials": "RM",
+      "color": "#EC4899"
+    },
+    {
+      "id": "usr_karan",
+      "name": "Karan Joshi",
+      "email": "karan.j@gmail.com",
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80",
+      "initials": "KJ",
+      "color": "#6B7280"
+    }
+  ],
+  "groups": [
+    {
+      "id": "grp_goa",
+      "name": "Goa Trip 🌴",
+      "category": "Trip",
+      "description": "Beach villas, scooty rides, seafood, and North Goa adventures!",
+      "coverImage": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80",
+      "currency": "INR",
+      "memberIds": [
+        "usr_alex",
+        "usr_maya",
+        "usr_rahul",
+        "usr_sam",
+        "usr_priya"
+      ],
+      "createdAt": "2024-10-15T10:00:00.000Z"
+    },
+    {
+      "id": "grp_flatmates",
+      "name": "Flatmates #402 🏠",
+      "category": "Living",
+      "description": "Monthly rent, Wi-Fi, electricity, groceries, and cook shared bills.",
+      "coverImage": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80",
+      "currency": "INR",
+      "memberIds": [
+        "usr_alex",
+        "usr_maya",
+        "usr_karan"
+      ],
+      "createdAt": "2024-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "grp_weekend",
+      "name": "Weekend Hangouts ☕",
+      "category": "Social",
+      "description": "Casual boardgame cafes, movie nights, dinners, and concerts.",
+      "coverImage": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80",
+      "currency": "INR",
+      "memberIds": [
+        "usr_alex",
+        "usr_sam",
+        "usr_rohan"
+      ],
+      "createdAt": "2024-10-01T12:00:00.000Z"
+    },
+    {
+      "id": "grp_college",
+      "name": "College Reunion 🎓",
+      "category": "Event",
+      "description": "Class of 2024 annual celebration meetup and reunion dinner.",
+      "coverImage": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=600&q=80",
+      "currency": "INR",
+      "memberIds": [
+        "usr_alex",
+        "usr_rohan",
+        "usr_rahul"
+      ],
+      "createdAt": "2024-10-10T15:00:00.000Z"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "exp_1",
+      "description": "Fisherman's Wharf Seafood Dinner",
+      "groupId": "grp_goa",
+      "groupName": "Goa Trip 🌴",
+      "payerId": "usr_alex",
+      "payerName": "Alex Morgan",
+      "amount": 4200,
+      "amountPaise": 420000,
+      "category": "Food & Dining",
+      "splitMethod": "equal",
+      "date": "2024-10-22T19:30:00.000Z",
+      "notes": "Includes 10% tip and coastal prawns special",
+      "receiptUrl": null,
+      "shares": [
+        {
+          "userId": "usr_alex",
+          "sharePaise": 105000,
+          "shareAmount": 1050,
+          "percentage": 25
+        },
+        {
+          "userId": "usr_maya",
+          "sharePaise": 105000,
+          "shareAmount": 1050,
+          "percentage": 25
+        },
+        {
+          "userId": "usr_rahul",
+          "sharePaise": 105000,
+          "shareAmount": 1050,
+          "percentage": 25
+        },
+        {
+          "userId": "usr_sam",
+          "sharePaise": 105000,
+          "shareAmount": 1050,
+          "percentage": 25
+        }
+      ]
+    },
+    {
+      "id": "exp_2",
+      "description": "Vagator Beach Villa 3 Nights",
+      "groupId": "grp_goa",
+      "groupName": "Goa Trip 🌴",
+      "payerId": "usr_alex",
+      "payerName": "Alex Morgan",
+      "amount": 8700,
+      "amountPaise": 870000,
+      "category": "Stay",
+      "splitMethod": "equal",
+      "date": "2024-10-20T14:00:00.000Z",
+      "notes": "Direct Airbnb host payment for all 5 guests",
+      "receiptUrl": null,
+      "shares": [
+        {
+          "userId": "usr_alex",
+          "sharePaise": 174000,
+          "shareAmount": 1740,
+          "percentage": 20
+        },
+        {
+          "userId": "usr_maya",
+          "sharePaise": 174000,
+          "shareAmount": 1740,
+          "percentage": 20
+        },
+        {
+          "userId": "usr_rahul",
+          "sharePaise": 174000,
+          "shareAmount": 1740,
+          "percentage": 20
+        },
+        {
+          "userId": "usr_sam",
+          "sharePaise": 174000,
+          "shareAmount": 1740,
+          "percentage": 20
+        },
+        {
+          "userId": "usr_priya",
+          "sharePaise": 174000,
+          "shareAmount": 1740,
+          "percentage": 20
+        }
+      ]
+    },
+    {
+      "id": "exp_3",
+      "description": "North Goa Scooty Fleet (3 Days)",
+      "groupId": "grp_goa",
+      "groupName": "Goa Trip 🌴",
+      "payerId": "usr_rahul",
+      "payerName": "Rahul Verma",
+      "amount": 2500,
+      "amountPaise": 250000,
+      "category": "Transport",
+      "splitMethod": "equal",
+      "date": "2024-10-21T11:00:00.000Z",
+      "notes": "Fuel paid separately by each rider",
+      "receiptUrl": null,
+      "shares": [
+        {
+          "userId": "usr_alex",
+          "sharePaise": 50000,
+          "shareAmount": 500,
+          "percentage": 20
+        },
+        {
+          "userId": "usr_maya",
+          "sharePaise": 50000,
+          "shareAmount": 500,
+          "percentage": 20
+        },
+        {
+          "userId": "usr_rahul",
+          "sharePaise": 50000,
+          "shareAmount": 500,
+          "percentage": 20
+        },
+        {
+          "userId": "usr_sam",
+          "sharePaise": 50000,
+          "shareAmount": 500,
+          "percentage": 20
+        },
+        {
+          "userId": "usr_priya",
+          "sharePaise": 50000,
+          "shareAmount": 500,
+          "percentage": 20
+        }
+      ]
+    },
+    {
+      "id": "exp_4",
+      "description": "Curlies Shack Sunset Snacks",
+      "groupId": "grp_goa",
+      "groupName": "Goa Trip 🌴",
+      "payerId": "usr_alex",
+      "payerName": "Alex Morgan",
+      "amount": 3000,
+      "amountPaise": 300000,
+      "category": "Food & Dining",
+      "splitMethod": "equal",
+      "date": "2024-10-23T18:00:00.000Z",
+      "notes": "Nachos, shakes, and mocktails",
+      "receiptUrl": null,
+      "shares": [
+        {
+          "userId": "usr_alex",
+          "sharePaise": 75000,
+          "shareAmount": 750,
+          "percentage": 25
+        },
+        {
+          "userId": "usr_maya",
+          "sharePaise": 75000,
+          "shareAmount": 750,
+          "percentage": 25
+        },
+        {
+          "userId": "usr_rahul",
+          "sharePaise": 75000,
+          "shareAmount": 750,
+          "percentage": 25
+        },
+        {
+          "userId": "usr_sam",
+          "sharePaise": 75000,
+          "shareAmount": 750,
+          "percentage": 25
+        }
+      ]
+    },
+    {
+      "id": "exp_5",
+      "description": "Airtel Fiber 200Mbps Wi-Fi",
+      "groupId": "grp_flatmates",
+      "groupName": "Flatmates #402 🏠",
+      "payerId": "usr_maya",
+      "payerName": "Maya Sen",
+      "amount": 1350,
+      "amountPaise": 135000,
+      "category": "Utilities",
+      "splitMethod": "equal",
+      "date": "2024-10-23T10:00:00.000Z",
+      "notes": "Monthly billing cycle Oct-Nov",
+      "receiptUrl": null,
+      "shares": [
+        {
+          "userId": "usr_alex",
+          "sharePaise": 45000,
+          "shareAmount": 450,
+          "percentage": 33.34
+        },
+        {
+          "userId": "usr_maya",
+          "sharePaise": 45000,
+          "shareAmount": 450,
+          "percentage": 33.33
+        },
+        {
+          "userId": "usr_karan",
+          "sharePaise": 45000,
+          "shareAmount": 450,
+          "percentage": 33.33
+        }
+      ]
+    },
+    {
+      "id": "exp_6",
+      "description": "Nature Basket Organic Groceries",
+      "groupId": "grp_flatmates",
+      "groupName": "Flatmates #402 🏠",
+      "payerId": "usr_alex",
+      "payerName": "Alex Morgan",
+      "amount": 3600,
+      "amountPaise": 360000,
+      "category": "Groceries",
+      "splitMethod": "equal",
+      "date": "2024-10-18T16:00:00.000Z",
+      "notes": "Kitchen staples and cleaning supplies",
+      "receiptUrl": null,
+      "shares": [
+        {
+          "userId": "usr_alex",
+          "sharePaise": 120000,
+          "shareAmount": 1200,
+          "percentage": 33.34
+        },
+        {
+          "userId": "usr_maya",
+          "sharePaise": 120000,
+          "shareAmount": 1200,
+          "percentage": 33.33
+        },
+        {
+          "userId": "usr_karan",
+          "sharePaise": 120000,
+          "shareAmount": 1200,
+          "percentage": 33.33
+        }
+      ]
+    },
+    {
+      "id": "exp_7",
+      "description": "Live Indie Acoustic Night Tickets",
+      "groupId": "grp_weekend",
+      "groupName": "Weekend Hangouts ☕",
+      "payerId": "usr_sam",
+      "payerName": "Sam Wilson",
+      "amount": 2400,
+      "amountPaise": 240000,
+      "category": "Entertainment",
+      "splitMethod": "equal",
+      "date": "2024-10-19T20:00:00.000Z",
+      "notes": "Entry tickets for 3 persons",
+      "receiptUrl": null,
+      "shares": [
+        {
+          "userId": "usr_alex",
+          "sharePaise": 80000,
+          "shareAmount": 800,
+          "percentage": 33.34
+        },
+        {
+          "userId": "usr_sam",
+          "sharePaise": 80000,
+          "shareAmount": 800,
+          "percentage": 33.33
+        },
+        {
+          "userId": "usr_rohan",
+          "sharePaise": 80000,
+          "shareAmount": 800,
+          "percentage": 33.33
+        }
+      ]
+    },
+    {
+      "id": "exp_8",
+      "description": "The Glass House Reunion Dinner",
+      "groupId": "grp_college",
+      "groupName": "College Reunion 🎓",
+      "payerId": "usr_alex",
+      "payerName": "Alex Morgan",
+      "amount": 4350,
+      "amountPaise": 435000,
+      "category": "Food & Dining",
+      "splitMethod": "equal",
+      "date": "2024-10-12T20:30:00.000Z",
+      "notes": "Dinner and drinks for 3 alumni",
+      "receiptUrl": null,
+      "shares": [
+        {
+          "userId": "usr_alex",
+          "sharePaise": 145000,
+          "shareAmount": 1450,
+          "percentage": 33.34
+        },
+        {
+          "userId": "usr_rohan",
+          "sharePaise": 145000,
+          "shareAmount": 1450,
+          "percentage": 33.33
+        },
+        {
+          "userId": "usr_rahul",
+          "sharePaise": 145000,
+          "shareAmount": 1450,
+          "percentage": 33.33
+        }
+      ]
+    }
+  ],
+  "settlements": [
+    {
+      "id": "stl_1",
+      "groupId": "grp_flatmates",
+      "groupName": "Flatmates #402 🏠",
+      "payerId": "usr_karan",
+      "payerName": "Karan Joshi",
+      "recipientId": "usr_alex",
+      "recipientName": "Alex Morgan",
+      "amount": 1200,
+      "amountPaise": 120000,
+      "method": "UPI",
+      "notes": "Settled for Oct groceries via Google Pay",
+      "date": "2024-10-21T14:30:00.000Z",
+      "status": "completed"
+    }
+  ],
+  "activities": [
+    {
+      "id": "act_1",
+      "type": "EXPENSE_ADDED",
+      "title": "New Expense Added",
+      "description": "Alex added Fisherman's Wharf Seafood Dinner (₹4,200.00) in Goa Trip 🌴",
+      "timestamp": "2024-10-22T19:32:00.000Z",
+      "userId": "usr_alex",
+      "groupId": "grp_goa"
+    },
+    {
+      "id": "act_2",
+      "type": "SETTLEMENT_RECORDED",
+      "title": "Settlement Completed",
+      "description": "Karan paid ₹1,200.00 to Alex via UPI",
+      "timestamp": "2024-10-21T14:31:00.000Z",
+      "userId": "usr_karan",
+      "groupId": "grp_flatmates"
+    },
+    {
+      "id": "act_3",
+      "type": "EXPENSE_ADDED",
+      "title": "New Expense Added",
+      "description": "Maya added Airtel Fiber 200Mbps Wi-Fi (₹1,350.00) in Flatmates #402 🏠",
+      "timestamp": "2024-10-23T10:05:00.000Z",
+      "userId": "usr_maya",
+      "groupId": "grp_flatmates"
+    }
+  ],
+  "metadata": {
+    "seeded": true,
+    "lastUpdated": "2026-10-23T09:49:15.938Z",
+    "seedTimestamp": "2026-10-23T09:49:15.938Z"
+  }
+}

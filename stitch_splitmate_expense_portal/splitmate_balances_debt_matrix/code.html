@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SplitMate - Balances Matrix &amp; Who Owes Whom</title>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#003b1b",
+            "outline": "#717970",
+            "surface-tint": "#2e6a41",
+            "surface-container": "#cff7de",
+            "on-tertiary-fixed-variant": "#3e4a3c",
+            "surface": "#e8ffef",
+            "surface-container-high": "#c9f2d9",
+            "error-container": "#ffdad6",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed": "#201c00",
+            "tertiary-fixed-dim": "#bdcab8",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed": "#d9e7d4",
+            "on-surface": "#002113",
+            "on-background": "#002113",
+            "outline-variant": "#c0c9be",
+            "surface-bright": "#e8ffef",
+            "secondary": "#6a5f00",
+            "surface-container-low": "#d4fde4",
+            "surface-dim": "#bbe3cb",
+            "secondary-container": "#f8e136",
+            "on-tertiary-fixed": "#131e13",
+            "error": "#ba1a1a",
+            "primary-fixed": "#b1f2be",
+            "on-secondary-container": "#6f6300",
+            "on-primary-container": "#87c695",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#12512c",
+            "on-tertiary-container": "#aebcaa",
+            "on-tertiary": "#ffffff",
+            "inverse-on-surface": "#d2fae1",
+            "on-surface-variant": "#404941",
+            "on-error-container": "#93000a",
+            "tertiary-container": "#404c3e",
+            "secondary-fixed": "#fbe439",
+            "secondary-fixed-dim": "#ddc815",
+            "surface-variant": "#c4ecd3",
+            "tertiary": "#293528",
+            "background": "#e8ffef",
+            "inverse-surface": "#123726",
+            "on-primary-fixed": "#00210d",
+            "surface-container-highest": "#c4ecd3",
+            "primary-container": "#14532d",
+            "inverse-primary": "#96d5a3",
+            "primary-fixed-dim": "#96d5a3",
+            "on-secondary-fixed-variant": "#504700"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "gutter": "1.25rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "1.5rem"
+          },
+          "fontFamily": {
+            "currency-sm": ["Manrope"],
+            "body-md": ["Inter"],
+            "currency-display": ["Manrope"],
+            "label-md": ["Manrope"],
+            "display-lg": ["Manrope"],
+            "display-lg-mobile": ["Manrope"],
+            "label-lg": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "headline-md": ["Manrope"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-sm": ["Manrope"]
+          },
+          "fontSize": {
+            "currency-sm": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "currency-display": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .ambient-card {
+      box-shadow: 0 4px 14px rgba(20, 83, 45, 0.06);
+    }
+    .ambient-pop {
+      box-shadow: 0 12px 32px rgba(20, 83, 45, 0.12);
+    }
+    .custom-border {
+      border: 1.5px solid #E1E3D5;
+    }
+    .butter-button {
+      background-color: #FFE83D;
+      color: #103D27;
+      border: 1.5px solid #14532D;
+      box-shadow: 0 2px 4px rgba(20, 83, 45, 0.1);
+      transition: all 0.15s ease-in-out;
+    }
+    .butter-button:hover {
+      background-color: #FFF7BF;
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body class="bg-[#FAF9F0] text-on-surface font-body-md antialiased min-h-screen flex">
+<!-- ================= SIDEBAR (Shared Component: SideNavBar) ================= -->
+<aside class="fixed top-0 left-0 h-screen w-60 z-30 bg-surface-container-lowest border-r border-outline-variant shadow-sm flex flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<!-- Brand Logo / Identity -->
+<div class="flex items-center gap-3 px-2 pt-1">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md text-primary font-bold tracking-tight leading-none">SplitMate</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Split Bills. Stay Friends.</div>
+</div>
+</div>
+<!-- Navigation Menu -->
+<nav aria-label="Main Navigation" class="flex flex-col gap-1.5">
+<!-- 1. Dashboard -->
+<a class="text-on-surface-variant hover:text-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 hover:bg-surface-container-high transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="text-label-lg font-label-lg">Dashboard</span>
+</a>
+<!-- 2. My Groups -->
+<a class="text-on-surface-variant hover:text-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 hover:bg-surface-container-high transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="group">group</span>
+<span class="text-label-lg font-label-lg">My Groups</span>
+</a>
+<!-- 3. All Expenses -->
+<a class="text-on-surface-variant hover:text-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 hover:bg-surface-container-high transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span>
+<span class="text-label-lg font-label-lg">All Expenses</span>
+</a>
+<!-- 4. Balances (ACTIVE TAB) -->
+<a class="bg-secondary-container text-on-secondary-container font-semibold rounded-xl px-3 py-2 flex items-center gap-3 shadow-xs" href="#">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="text-label-lg font-label-lg text-primary font-bold">Balances</span>
+</a>
+<!-- 5. Settlements -->
+<a class="text-on-surface-variant hover:text-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 hover:bg-surface-container-high transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="handshake">handshake</span>
+<span class="text-label-lg font-label-lg">Settlements</span>
+</a>
+<!-- 6. Insights -->
+<a class="text-on-surface-variant hover:text-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 hover:bg-surface-container-high transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="analytics">analytics</span>
+<span class="text-label-lg font-label-lg">Insights</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Actions & User Profile -->
+<div class="flex flex-col gap-2 pt-4 border-t border-outline-variant">
+<a class="text-on-surface-variant hover:text-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 hover:bg-surface-container-high transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+<span class="text-label-lg font-label-lg">Help &amp; Support</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 hover:bg-surface-container-high transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="text-label-lg font-label-lg">Settings</span>
+</a>
+<!-- Alex Morgan Account Snippet -->
+<div class="mt-2 p-2.5 rounded-xl bg-surface-container-high flex items-center gap-3 custom-border">
+<div class="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0 bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs ring-2 ring-[#E1E3D5]">
+<img class="w-full h-full object-cover" data-alt="A warm, candid close-up portrait of a smiling young adult named Alex against a gentle botanical green background, soft studio ambient light, modern digital fintech lifestyle photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsksP5qMM-M__hZsfns52Ms38tgAE0muTM5d26KHwjed_bjSNf-Ivww_5L4SD7MxOht4GVC_w2WXEz2HeokADJsh1NH5a2MtCM9nKTIx_MxyvOxwjQEq41BvSTng9ZQl14dB1l5Rcrmnt-YAuB2OxCFC6__PfngTjrLuwGrWrtKiynIebaU4Q0FN_uaA-y4hKPtW3lRJFMFT4CHsG6fg-D5W5O1632t1qVYeTkE3DGDUoTiSzFFU2bsA"/>
+</div>
+<div class="min-w-0 flex-1">
+<p class="text-label-lg font-label-lg text-primary truncate leading-tight">Alex Morgan</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant truncate">alex.m@splitmate.io</p>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</aside>
+<!-- ================= TOP APP BAR (Shared Component: TopNavBar) ================= -->
+<header class="fixed top-0 left-60 right-0 h-16 bg-surface-container-lowest border-b border-outline-variant shadow-sm z-20 flex items-center justify-between px-6">
+<!-- Left: Breadcrumbs & Search -->
+<div class="flex items-center gap-6 flex-1 max-w-2xl">
+<div class="hidden xl:flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant">
+<span class="text-outline">Pages</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-bold">Balances</span>
+</div>
+<!-- Search Input -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-4 bg-[#FAF9F0] border border-outline-variant rounded-xl text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-secondary-container transition-all" placeholder="Search friends, groups, or balances..." type="text"/>
+</div>
+</div>
+<!-- Right Controls: Action + Notifications + Profile -->
+<div class="flex items-center gap-3">
+<!-- Primary Action CTA -->
+<button class="butter-button font-label-lg text-label-lg px-4 py-2 rounded-xl flex items-center gap-1.5 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px] font-bold" data-icon="add">add</span>
+<span>+ Add Expense</span>
+</button>
+<!-- Notification Action -->
+<button aria-label="Notifications" class="relative w-10 h-10 rounded-xl hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+</button>
+<!-- Divider -->
+<div class="h-6 w-[1.5px] bg-outline-variant mx-1"></div>
+<!-- User Avatar Action -->
+<div class="flex items-center gap-2 pl-1 cursor-pointer">
+<div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-xs font-bold ring-2 ring-[#FFE83D] overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A refined studio headshot portrait of Alex wearing relaxed casual attire, soft natural window lighting, clean warm cream and forest green color tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtuLALzvMPolVUDWm3CNgheRYdejrGM_0rVCauyBxzfU6NEit35kN4Dj89JjsOwxkcOPBM_HAFY151dLQ2VWkor1_4gVinoIcPyiJILxwbj9WlKG_eGcOPF4J1ZdKVDSmKSOTug8SUCKr2OuUJRla5QuxA9ALdJ0hBE20aK-0KD1JnXwYyEUZyRlzFU3yBLLdw3EagXw97PkKWcHEtmz4gUzAjQwabRsZ-bGoTfgkmz56lYePKzyhsLA"/>
+</div>
+</div>
+</div>
+</header>
+<!-- ================= MAIN CONTENT VIEWPORT ================= -->
+<main class="ml-60 pt-16 flex-1 min-h-screen overflow-y-auto">
+<div class="max-w-[1280px] mx-auto p-6 md:p-8 space-y-8">
+<!-- Page Title & Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2.5">
+<h1 class="text-headline-lg font-headline-lg text-primary tracking-tight">Balances</h1>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-primary font-label-md text-label-md custom-border">
+              Live Ledger
+            </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1 max-w-2xl">
+            See what you owe and what others owe you across all your shared groups. Settled automatically through smart debt resolution.
+          </p>
+</div>
+<!-- Quick Top Settlement Trigger -->
+<div class="flex items-center gap-3">
+<button class="px-3.5 py-2 rounded-xl bg-surface-container-lowest custom-border ambient-card text-primary font-label-lg text-label-lg hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+<span>Export Statement</span>
+</button>
+<button class="px-4 py-2 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-[#21864A] transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span>Quick UPI Settle</span>
+</button>
+</div>
+</div>
+<!-- ================= 3 SUMMARY METRIC CARDS ================= -->
+<section aria-label="Net Balance Summary" class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- CARD 1: NET BALANCE (Big Prominent) -->
+<div class="rounded-[20px] bg-[#FFFBE6] custom-border ambient-card p-6 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<span class="text-label-md font-label-md text-on-secondary-container tracking-wider uppercase font-bold">NET BALANCE</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#FFE83D] text-[#103D27] text-label-md font-label-lg font-bold shadow-xs">
+<span class="material-symbols-outlined text-[15px]" data-icon="arrow_upward">arrow_upward</span>
+              You are owed overall
+            </span>
+</div>
+<div class="my-4">
+<div class="text-currency-display font-currency-display text-primary flex items-baseline gap-1">
+<span>+₹2,450.00</span>
+</div>
+<p class="text-body-sm font-body-sm text-[#14532D] mt-1 flex items-center gap-1.5 font-medium">
+<span class="material-symbols-outlined text-[16px] text-[#21864A]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+              Net positive across 4 active groups
+            </p>
+</div>
+<div class="pt-3 border-t border-[#E1E3D5]/80 flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Calculation mode:</span>
+<span class="font-semibold text-primary">Simplified Direct Matrix</span>
+</div>
+</div>
+<!-- CARD 2: TOTAL YOU OWE -->
+<div class="rounded-[20px] bg-surface-container-lowest custom-border ambient-card p-6 flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<span class="text-label-md font-label-md text-error tracking-wider uppercase font-bold">TOTAL YOU OWE</span>
+<div class="w-8 h-8 rounded-full bg-error-container/60 text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="call_made">call_made</span>
+</div>
+</div>
+<div class="my-4">
+<div class="text-currency-display font-currency-display text-error">
+              ₹1,250.00
+            </div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+              Outstanding debt across <strong class="text-on-surface font-semibold">2 friends</strong>
+</p>
+</div>
+<div class="pt-3 border-t border-outline-variant flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Earliest settlement:</span>
+<span class="font-semibold text-on-surface">Maya Sen (Today)</span>
+</div>
+</div>
+<!-- CARD 3: TOTAL OWED TO YOU -->
+<div class="rounded-[20px] bg-surface-container-lowest custom-border ambient-card p-6 flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<span class="text-label-md font-label-md text-[#21864A] tracking-wider uppercase font-bold">TOTAL OWED TO YOU</span>
+<div class="w-8 h-8 rounded-full bg-[#DDEBD8] text-[#14532D] flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="call_received">call_received</span>
+</div>
+</div>
+<div class="my-4">
+<div class="text-currency-display font-currency-display text-[#14532D]">
+              ₹3,700.00
+            </div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+              Expected incoming cash from <strong class="text-on-surface font-semibold">4 friends</strong>
+</p>
+</div>
+<div class="pt-3 border-t border-outline-variant flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Biggest single return:</span>
+<span class="font-semibold text-primary">₹1,450 (Priya Patel)</span>
+</div>
+</div>
+</section>
+<!-- ================= FILTER & SEARCH TOOLBAR ================= -->
+<section class="rounded-[18px] bg-surface-container-lowest custom-border p-4 ambient-card flex flex-wrap items-center justify-between gap-4">
+<!-- Left: Filters for Groups and Status -->
+<div class="flex flex-wrap items-center gap-3">
+<!-- Group Selector Filter -->
+<div class="relative">
+<label class="sr-only" for="group-filter">Filter by Group</label>
+<div class="flex items-center gap-2 bg-[#FAF9F0] px-3.5 py-2 rounded-xl custom-border">
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="group">group</span>
+<select class="bg-transparent text-label-lg font-label-lg text-primary focus:outline-none pr-6 cursor-pointer" id="group-filter">
+<option selected="" value="all">All Groups (4)</option>
+<option value="goa">Goa Trip</option>
+<option value="flat">Flatmates #402</option>
+<option value="weekend">Weekend Hangouts</option>
+<option value="college">College Reunion</option>
+</select>
+</div>
+</div>
+<!-- Status Pill Switches -->
+<div class="flex items-center gap-1.5 bg-[#FAF9F0] p-1 rounded-xl custom-border">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-bold shadow-xs">
+              All (6)
+            </button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors">
+              You Owe (2)
+            </button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors">
+              Owes You (3)
+            </button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors">
+              Settled (1)
+            </button>
+</div>
+</div>
+<!-- Right: Friend Quick Search -->
+<div class="relative min-w-[240px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="person_search">person_search</span>
+<input class="w-full h-9 pl-9 pr-3 bg-[#FAF9F0] custom-border rounded-xl text-body-md font-body-md placeholder:text-outline text-on-surface focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search friend by name..." type="text"/>
+</div>
+</section>
+<!-- ================= 2-COLUMN MAIN LEDGER & SIDEBAR MATRIX ================= -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT 7/12: WHO OWES WHOM BILATERAL CARDS -->
+<section aria-label="Individual Friend Ledger" class="lg:col-span-7 space-y-4">
+<div class="flex items-center justify-between px-1">
+<h2 class="text-headline-sm font-headline-sm text-primary">Friend Balances Breakdown</h2>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Showing 6 relationships</span>
+</div>
+<!-- RELATIONSHIP 1: Maya Sen (You Owe ₹450) -->
+<div class="rounded-[20px] bg-surface-container-lowest custom-border ambient-card p-5 transition-all hover:border-[#14532D]/40">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<!-- Friend Identity & Context -->
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-base border border-amber-300 flex-shrink-0">
+                  MS
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Maya Sen</h3>
+<span class="px-2 py-0.5 rounded-full bg-[#FFF7BF] text-[#6A5F00] text-label-md font-label-md font-bold">
+                      You Owe
+                    </span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="apartment">apartment</span>
+<span>Flatmates #402 (Groceries &amp; Wi-Fi)</span>
+</div>
+</div>
+</div>
+<!-- Amount & Settle CTA -->
+<div class="flex items-center sm:flex-col sm:items-end justify-between sm:justify-center gap-2 pt-2 sm:pt-0 border-t sm:border-0 border-outline-variant">
+<div class="text-right">
+<span class="text-body-sm font-body-sm text-error font-medium">You owe Maya</span>
+<div class="text-currency-sm font-currency-sm text-error text-xl font-extrabold leading-none">
+                    ₹450.00
+                  </div>
+</div>
+<button class="butter-button px-4 py-1.5 rounded-xl text-label-md font-label-lg font-bold flex items-center gap-1 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px]" data-icon="payments">payments</span>
+<span>Settle Up</span>
+</button>
+</div>
+</div>
+<!-- Mini Footnote / History Hint -->
+<div class="mt-3 pt-3 border-t border-[#E1E3D5] flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Last updated: Yesterday for "Airtel Fiber 200Mbps"</span>
+<a class="text-primary font-semibold hover:underline flex items-center gap-0.5" href="#">
+<span>View 3 expenses</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- RELATIONSHIP 2: Rahul Verma (Owes You ₹800) -->
+<div class="rounded-[20px] bg-surface-container-lowest custom-border ambient-card p-5 transition-all hover:border-[#14532D]/40">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<!-- Friend Identity -->
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-2xl bg-[#DDEBD8] text-[#14532D] flex items-center justify-center font-bold text-base border border-[#C0C9BE] flex-shrink-0">
+                  RV
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Rahul Verma</h3>
+<span class="px-2 py-0.5 rounded-full bg-[#DDEBD8] text-[#14532D] text-label-md font-label-md font-bold">
+                      Owes You
+                    </span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="beach_access">beach_access</span>
+<span>Goa Trip (Beach Shack Dinner)</span>
+</div>
+</div>
+</div>
+<!-- Amount & Actions -->
+<div class="flex items-center sm:flex-col sm:items-end justify-between sm:justify-center gap-2 pt-2 sm:pt-0 border-t sm:border-0 border-outline-variant">
+<div class="text-right">
+<span class="text-body-sm font-body-sm text-[#21864A] font-medium">Rahul owes you</span>
+<div class="text-currency-sm font-currency-sm text-[#14532D] text-xl font-extrabold leading-none">
+                    ₹800.00
+                  </div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-xl border border-outline-variant text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]" data-icon="notification_important">notification_important</span>
+<span>Send Reminder</span>
+</button>
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-high text-primary font-label-md text-label-md font-semibold hover:bg-surface-container transition-colors">
+                    Record Payment
+                  </button>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-3 border-t border-[#E1E3D5] flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span class="text-[#21864A] font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                Reminder sent 3 days ago
+              </span>
+<a class="text-primary font-semibold hover:underline flex items-center gap-0.5" href="#">
+<span>View 2 expenses</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- RELATIONSHIP 3: Sam Wilson (You Owe ₹800) -->
+<div class="rounded-[20px] bg-surface-container-lowest custom-border ambient-card p-5 transition-all hover:border-[#14532D]/40">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-base border border-amber-300 flex-shrink-0">
+                  SW
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Sam Wilson</h3>
+<span class="px-2 py-0.5 rounded-full bg-[#FFF7BF] text-[#6A5F00] text-label-md font-label-md font-bold">
+                      You Owe
+                    </span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="music_note">music_note</span>
+<span>Weekend Hangouts (Concert tickets)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center sm:flex-col sm:items-end justify-between sm:justify-center gap-2 pt-2 sm:pt-0 border-t sm:border-0 border-outline-variant">
+<div class="text-right">
+<span class="text-body-sm font-body-sm text-error font-medium">You owe Sam</span>
+<div class="text-currency-sm font-currency-sm text-error text-xl font-extrabold leading-none">
+                    ₹800.00
+                  </div>
+</div>
+<button class="butter-button px-4 py-1.5 rounded-xl text-label-md font-label-lg font-bold flex items-center gap-1 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px]" data-icon="payments">payments</span>
+<span>Settle Up</span>
+</button>
+</div>
+</div>
+<div class="mt-3 pt-3 border-t border-[#E1E3D5] flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Split type: Equal (3 participants)</span>
+<a class="text-primary font-semibold hover:underline flex items-center gap-0.5" href="#">
+<span>View receipt</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- RELATIONSHIP 4: Priya Patel (Owes You ₹1,450) -->
+<div class="rounded-[20px] bg-surface-container-lowest custom-border ambient-card p-5 transition-all hover:border-[#14532D]/40">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-2xl bg-[#DDEBD8] text-[#14532D] flex items-center justify-center font-bold text-base border border-[#C0C9BE] flex-shrink-0">
+                  PP
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Priya Patel</h3>
+<span class="px-2 py-0.5 rounded-full bg-[#DDEBD8] text-[#14532D] text-label-md font-label-md font-bold">
+                      Owes You
+                    </span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="villa">villa</span>
+<span>Goa Trip (Villa deposit)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center sm:flex-col sm:items-end justify-between sm:justify-center gap-2 pt-2 sm:pt-0 border-t sm:border-0 border-outline-variant">
+<div class="text-right">
+<span class="text-body-sm font-body-sm text-[#21864A] font-medium">Priya owes you</span>
+<div class="text-currency-sm font-currency-sm text-[#14532D] text-xl font-extrabold leading-none">
+                    ₹1,450.00
+                  </div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-xl border border-outline-variant text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]" data-icon="notifications">notifications</span>
+<span>Remind</span>
+</button>
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-high text-primary font-label-md text-label-md font-semibold hover:bg-surface-container transition-colors">
+                    Settle
+                  </button>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-3 border-t border-[#E1E3D5] flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Direct share for 3 nights Airbnb luxury booking</span>
+<a class="text-primary font-semibold hover:underline flex items-center gap-0.5" href="#">
+<span>View details</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- RELATIONSHIP 5: Rohan Mehta (Owes You ₹1,450) -->
+<div class="rounded-[20px] bg-surface-container-lowest custom-border ambient-card p-5 transition-all hover:border-[#14532D]/40">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-2xl bg-[#DDEBD8] text-[#14532D] flex items-center justify-center font-bold text-base border border-[#C0C9BE] flex-shrink-0">
+                  RM
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Rohan Mehta</h3>
+<span class="px-2 py-0.5 rounded-full bg-[#DDEBD8] text-[#14532D] text-label-md font-label-md font-bold">
+                      Owes You
+                    </span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="restaurant">restaurant</span>
+<span>College Reunion (Catering)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center sm:flex-col sm:items-end justify-between sm:justify-center gap-2 pt-2 sm:pt-0 border-t sm:border-0 border-outline-variant">
+<div class="text-right">
+<span class="text-body-sm font-body-sm text-[#21864A] font-medium">Rohan owes you</span>
+<div class="text-currency-sm font-currency-sm text-[#14532D] text-xl font-extrabold leading-none">
+                    ₹1,450.00
+                  </div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-xl border border-outline-variant text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]" data-icon="notifications">notifications</span>
+<span>Remind</span>
+</button>
+<button class="px-3 py-1.5 rounded-xl bg-surface-container-high text-primary font-label-md text-label-md font-semibold hover:bg-surface-container transition-colors">
+                    Settle
+                  </button>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-3 border-t border-[#E1E3D5] flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Paid upfront at The Glass House Diner</span>
+<a class="text-primary font-semibold hover:underline flex items-center gap-0.5" href="#">
+<span>View bill breakdown</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- RELATIONSHIP 6: Karan Joshi (Settled Up ₹0.00) -->
+<div class="rounded-[20px] bg-surface-container-lowest/70 custom-border ambient-card p-5 border-dashed">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-2xl bg-surface-container text-on-surface-variant flex items-center justify-center font-bold text-base border border-outline-variant flex-shrink-0">
+                  KJ
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Karan Joshi</h3>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary text-label-md font-label-md font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                      All Settled
+                    </span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="apartment">apartment</span>
+<span>Flatmates #402</span>
+</div>
+</div>
+</div>
+<div class="flex items-center sm:flex-col sm:items-end justify-between sm:justify-center gap-1 pt-2 sm:pt-0">
+<div class="text-right">
+<span class="text-body-sm font-body-sm text-outline font-medium">Net balance</span>
+<div class="text-currency-sm font-currency-sm text-outline text-lg font-bold leading-none">
+                    ₹0.00
+                  </div>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface-variant italic">No pending dues</span>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT 5/12: SMART DEBT SIMPLIFICATION & QUICK ACTIONS -->
+<div class="lg:col-span-5 space-y-6">
+<!-- PANEL 1: SMART DEBT SIMPLIFICATION ENGINE -->
+<div class="rounded-[20px] bg-surface-container-lowest custom-border ambient-card p-6 relative">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-xl bg-primary-container text-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-primary">Debt Simplification</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Graph theory algorithm enabled</p>
+</div>
+</div>
+<!-- Active Toggle -->
+<div class="flex items-center gap-2">
+<span class="text-label-md font-label-md text-primary font-bold">ON</span>
+<button aria-pressed="true" class="w-11 h-6 bg-primary-container rounded-full relative p-0.5 transition-colors focus:outline-none" type="button">
+<div class="w-5 h-5 rounded-full bg-secondary-container transform translate-x-5 shadow-sm transition-transform"></div>
+</button>
+</div>
+</div>
+<!-- Optimization Highlight Callout -->
+<div class="my-4 p-3.5 rounded-xl bg-[#FFFBE6] border border-[#FFE83D]/60 flex items-start gap-3">
+<span class="material-symbols-outlined text-[#6A5F00] text-[20px] flex-shrink-0 mt-0.5" data-icon="savings">savings</span>
+<p class="text-body-sm font-body-sm text-[#103D27] leading-relaxed">
+                We reduced <strong>7 bilateral transactions down to 3 direct transfers</strong>, saving your groups approximately <strong>₹1,200</strong> in unnecessary cross-account transaction friction!
+              </p>
+</div>
+<!-- Visual Flowchart of Simplified Transfers -->
+<div class="space-y-3 pt-1">
+<p class="text-label-md font-label-md text-outline uppercase font-bold tracking-wider">Suggested settlement route</p>
+<!-- Route Item 1 -->
+<div class="p-3 rounded-xl bg-[#FAF9F0] custom-border flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-bold text-on-surface">You</span>
+<span class="material-symbols-outlined text-[16px] text-error" data-icon="arrow_right_alt">arrow_right_alt</span>
+<span class="font-bold text-on-surface truncate">Maya Sen</span>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0">
+<span class="font-currency-sm font-bold text-error">₹450.00</span>
+<span class="material-symbols-outlined text-[16px] text-[#21864A]" data-icon="verified">verified</span>
+</div>
+</div>
+<!-- Route Item 2 -->
+<div class="p-3 rounded-xl bg-[#FAF9F0] custom-border flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-bold text-on-surface">Priya Patel</span>
+<span class="material-symbols-outlined text-[16px] text-[#21864A]" data-icon="arrow_right_alt">arrow_right_alt</span>
+<span class="font-bold text-on-surface truncate">Sam Wilson</span>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0">
+<span class="font-currency-sm font-bold text-[#14532D]">₹800.00</span>
+<span class="material-symbols-outlined text-[16px] text-[#21864A]" data-icon="verified">verified</span>
+</div>
+</div>
+<!-- Route Item 3 -->
+<div class="p-3 rounded-xl bg-[#FAF9F0] custom-border flex items-center justify-between text-body-sm font-body-sm">
+<div class="flex items-center gap-2 min-w-0">
+<span class="font-bold text-on-surface">Rohan Mehta</span>
+<span class="material-symbols-outlined text-[16px] text-[#21864A]" data-icon="arrow_right_alt">arrow_right_alt</span>
+<span class="font-bold text-on-surface truncate">You</span>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0">
+<span class="font-currency-sm font-bold text-[#14532D]">₹1,450.00</span>
+<span class="material-symbols-outlined text-[16px] text-[#21864A]" data-icon="verified">verified</span>
+</div>
+</div>
+</div>
+<!-- Auto Settle All Button -->
+<button class="w-full mt-4 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-[#21864A] transition-colors flex items-center justify-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="hub">hub</span>
+<span>Execute Simplified Transfers</span>
+</button>
+</div>
+<!-- PANEL 2: UPCOMING SETTLEMENTS & BATCH ACTIONS -->
+<div class="rounded-[20px] bg-surface-container-lowest custom-border ambient-card p-6 space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-headline-sm font-headline-sm text-primary">Pending Requests</h3>
+<span class="w-2.5 h-2.5 rounded-full bg-error ring-4 ring-error-container"></span>
+</div>
+<div class="space-y-3">
+<!-- Item 1 -->
+<div class="p-3 rounded-xl bg-[#FAF9F0] custom-border flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-xs">
+                    RV
+                  </div>
+<div>
+<p class="text-body-md font-body-md text-on-surface font-semibold leading-tight">Rahul Verma</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Owes ₹800.00 for Beach Shack</p>
+</div>
+</div>
+<button class="text-body-sm font-body-sm text-primary font-bold hover:underline">
+                  Remind
+                </button>
+</div>
+<!-- Item 2 -->
+<div class="p-3 rounded-xl bg-[#FAF9F0] custom-border flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-xs">
+                    MS
+                  </div>
+<div>
+<p class="text-body-md font-body-md text-on-surface font-semibold leading-tight">Maya Sen</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Awaiting ₹450 from you</p>
+</div>
+</div>
+<button class="butter-button px-2.5 py-1 rounded-lg text-label-md font-label-md font-bold">
+                  Pay Now
+                </button>
+</div>
+</div>
+<!-- Batch Action Trigger -->
+<div class="pt-2">
+<button class="w-full py-2.5 rounded-xl border border-outline-variant bg-[#FAF9F0] hover:bg-surface-container-high text-primary font-label-lg text-label-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="send">send</span>
+<span>Send Payment Reminder to All (3)</span>
+</button>
+</div>
+</div>
+<!-- PANEL 3: FRIENDLY ATMOSPHERIC CELEBRATORY TEASER -->
+<div class="rounded-[20px] bg-gradient-to-br from-[#DDEBD8] to-[#FAF9F0] custom-border p-5 flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-primary-container text-secondary-container flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="sentiment_very_satisfied">sentiment_very_satisfied</span>
+</div>
+<div>
+<p class="text-label-lg font-label-lg text-primary font-bold">Keep balances low to stay stress-free!</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+                Friends who settle within 48 hours report 94% higher satisfaction on joint weekend trips.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SplitMate — Add Expense Modal</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-on-surface": "#d2fae1",
+            "on-tertiary-fixed": "#131e13",
+            "surface-bright": "#e8ffef",
+            "surface-container": "#cff7de",
+            "surface-dim": "#bbe3cb",
+            "on-primary-fixed": "#00210d",
+            "on-primary-fixed-variant": "#12512c",
+            "error": "#ba1a1a",
+            "secondary-container": "#f8e136",
+            "background": "#e8ffef",
+            "primary-fixed-dim": "#96d5a3",
+            "primary-container": "#14532d",
+            "tertiary-container": "#404c3e",
+            "on-primary": "#ffffff",
+            "on-surface": "#002113",
+            "primary-fixed": "#b1f2be",
+            "secondary-fixed-dim": "#ddc815",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#2e6a41",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#3e4a3c",
+            "outline-variant": "#c0c9be",
+            "on-secondary-fixed": "#201c00",
+            "outline": "#717970",
+            "on-secondary": "#ffffff",
+            "surface": "#e8ffef",
+            "surface-container-low": "#d4fde4",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#bdcab8",
+            "inverse-surface": "#123726",
+            "on-error-container": "#93000a",
+            "on-tertiary-container": "#aebcaa",
+            "secondary-fixed": "#fbe439",
+            "tertiary-fixed": "#d9e7d4",
+            "surface-container-high": "#c9f2d9",
+            "on-primary-container": "#87c695",
+            "on-surface-variant": "#404941",
+            "tertiary": "#293528",
+            "secondary": "#6a5f00",
+            "on-background": "#002113",
+            "on-secondary-fixed-variant": "#504700",
+            "surface-variant": "#c4ecd3",
+            "inverse-primary": "#96d5a3",
+            "primary": "#003b1b",
+            "on-error": "#ffffff",
+            "on-secondary-container": "#6f6300",
+            "surface-container-highest": "#c4ecd3"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "margin": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "gutter": "1.25rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Manrope"],
+            "currency-sm": ["Manrope"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Manrope"],
+            "display-lg-mobile": ["Manrope"],
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "label-md": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "currency-display": ["Manrope"],
+            "headline-sm": ["Manrope"],
+            "display-lg": ["Manrope"]
+          },
+          "fontSize": {
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+            "currency-sm": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "currency-display": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Custom scrollbar and ambient styles */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c0c9be;
+      border-radius: 9999px;
+    }
+    .ambient-card-shadow {
+      box-shadow: 0 4px 14px rgba(20, 83, 45, 0.06);
+    }
+    .modal-forest-shadow {
+      box-shadow: 0 20px 48px -8px rgba(20, 83, 45, 0.22), 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased h-full overflow-hidden select-none">
+<!-- ==================== BACKGROUND PERSISTENT APP SHELL (DESKTOP) ==================== -->
+<div class="flex h-screen w-screen overflow-hidden">
+<!-- LEFT SIDEBAR COMPONENT (Shared Components JSON Anchor) -->
+<aside class="fixed top-0 left-0 h-screen w-60 z-30 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant dark:border-outline shadow-sm dark:shadow-none flex flex-col justify-between p-4">
+<!-- Header / Logo -->
+<div>
+<div class="flex items-center gap-3 px-2 py-3 mb-4">
+<div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center border border-primary-container shadow-xs">
+<span class="material-symbols-outlined text-primary font-bold" data-icon="splitscreen">splitscreen</span>
+</div>
+<div>
+<div class="text-headline-sm font-headline-sm text-primary dark:text-inverse-primary font-bold leading-tight">SplitMate</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant leading-none">Split Bills. Stay Friends.</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="space-y-1">
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="text-label-lg font-label-lg">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="group">group</span>
+<span class="text-label-lg font-label-lg">My Groups</span>
+</a>
+<a class="bg-secondary-container text-on-secondary-container font-semibold rounded-xl px-3 py-2 flex items-center gap-3 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl text-primary" data-icon="receipt_long">receipt_long</span>
+<span class="text-label-lg font-label-lg text-primary">All Expenses</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-label-lg font-label-lg">Balances</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="handshake">handshake</span>
+<span class="text-label-lg font-label-lg">Settlements</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="analytics">analytics</span>
+<span class="text-label-lg font-label-lg">Insights</span>
+</a>
+</nav>
+</div>
+<!-- Footer navigation -->
+<div class="border-t border-outline-variant pt-3 space-y-1">
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
+<span class="text-label-lg font-label-lg">Help &amp; Support</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface dark:text-surface-variant dark:hover:text-inverse-on-surface font-medium rounded-xl px-3 py-2 flex items-center gap-3 transition-colors hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span class="text-label-lg font-label-lg">Settings</span>
+</a>
+</div>
+</aside>
+<!-- MAIN APP CANVAS BACKGROUND (Simulating the active web app behind modal) -->
+<div class="flex-1 ml-60 flex flex-col h-screen overflow-hidden bg-surface">
+<!-- TOP NAV BAR (Shared Components JSON Anchor) -->
+<header class="docked full-width top-0 h-16 z-20 bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none flex items-center justify-between px-6">
+<!-- Search bar on left -->
+<div class="flex items-center gap-4 w-96">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="w-full pl-9 pr-4 py-1.5 text-body-md font-body-md bg-surface border border-outline-variant rounded-xl focus:border-primary-container focus:outline-none" placeholder="Search expenses, trips, notes..." type="text"/>
+</div>
+</div>
+<!-- Trailing actions -->
+<div class="flex items-center gap-3">
+<button class="relative p-2 rounded-xl text-on-surface-variant hover:bg-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary-container border border-primary-container"></span>
+</button>
+<div class="h-6 w-px bg-outline-variant mx-1"></div>
+<button class="bg-secondary-container hover:bg-secondary-fixed text-primary font-bold text-label-lg font-label-lg px-4 py-2 rounded-xl border border-primary-container flex items-center gap-1.5 shadow-sm active:scale-[0.98]">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span>+ Add Expense</span>
+</button>
+<div class="flex items-center gap-2 pl-2">
+<div class="w-9 h-9 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center font-bold text-primary font-headline-sm overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Warm natural portrait of Alex, a smiling young adult with cheerful expression, soft natural lighting and warm emerald tones matching the design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhtSx5d6tpA5xHAZGt13TyRZv-XBEb0RPoetdsS70pQkHZvxNncPlsssc6HoRjyJ-m7bohlY4P8sk2n54eirFU91VmrgsEGppnnzKujvWdG1W57SwcvIGaseMGVAdWFLTqK5dPky2TI7cL6QtAVbGEyMdQEmh_xRfoBksJXtNVeAPjtE-Bgw6EIkH7oJ6fa3YVDAiHr21rYp4Ojc4PCJJ4oWg0xHXIxkSbde_rGjK7o9JJ_8UepHuCtg"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Background Dashboard Ledger Content Preview (Blurred / Behind Modal) -->
+<main class="flex-1 p-6 overflow-y-auto space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-primary">All Expenses</h1>
+<p class="text-body-md font-body-md text-on-surface-variant">Active group: Goa Beach Vacation 🌴</p>
+</div>
+<div class="flex gap-2">
+<div class="px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant text-label-md font-label-md flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-tint"></span> Group Pool: ₹28,450.00
+            </div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-5">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-5 ambient-card-shadow">
+<div class="text-label-md font-label-md text-on-surface-variant">Total You Paid</div>
+<div class="text-currency-display font-currency-display text-primary mt-1">₹14,800.00</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-5 ambient-card-shadow">
+<div class="text-label-md font-label-md text-surface-tint">You are owed</div>
+<div class="text-currency-display font-currency-display text-surface-tint mt-1">+₹6,450.00</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-5 ambient-card-shadow">
+<div class="text-label-md font-label-md text-error">You owe</div>
+<div class="text-currency-display font-currency-display text-error mt-1">-₹1,200.00</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- ==================== ADD EXPENSE MODAL OVERLAY & CARD ==================== -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+<!-- Dimmed Translucent Backdrop with Blur -->
+<div class="fixed inset-0 bg-primary/40 backdrop-blur-[6px] transition-opacity"></div>
+<!-- Centered Modal Window Card (720px width) -->
+<div class="relative w-full max-w-[730px] max-h-[92vh] bg-surface-container-lowest border-[1.5px] border-outline-variant rounded-[24px] modal-forest-shadow flex flex-col z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+<!-- Modal Header -->
+<div class="px-6 py-4 border-b border-outline-variant flex items-center justify-between bg-surface-container-low/40">
+<div class="flex items-center gap-3.5">
+<div class="w-11 h-11 rounded-2xl bg-secondary-container border border-primary-container flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-primary text-2xl font-bold" data-icon="receipt">receipt</span>
+</div>
+<div>
+<h2 class="text-headline-md font-headline-md text-primary leading-snug">Add an Expense</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Log a bill, select friends, and split it effortlessly.</p>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all active:scale-95" title="Close modal">
+<span class="material-symbols-outlined text-xl" data-icon="close">close</span>
+</button>
+</div>
+<!-- Scrollable Form Body -->
+<form class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar" onsubmit="event.preventDefault();">
+<!-- SECTION 1: BASIC DETAILS -->
+<div class="space-y-4">
+<!-- Description & Amount Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<!-- Description -->
+<div class="md:col-span-7">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1.5">
+                Expense Description <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-3.5 text-on-surface-variant text-xl" data-icon="edit_note">edit_note</span>
+<input class="w-full h-12 pl-11 pr-4 bg-surface-container-lowest border-[1.5px] border-outline-variant rounded-[14px] text-body-md font-body-md text-on-surface focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-secondary-container transition-all" placeholder="e.g. Goa Beach Shack, Cab to Airport" type="text" value="Fisherman's Wharf Seafood Dinner"/>
+</div>
+</div>
+<!-- Currency & Amount with Large INR typography -->
+<div class="md:col-span-5">
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1.5">
+                Amount (INR) <span class="text-error">*</span>
+</label>
+<div class="relative flex items-center">
+<div class="absolute left-3.5 flex items-center pointer-events-none text-primary font-currency-display font-extrabold text-2xl">
+                  ₹
+                </div>
+<input class="w-full h-12 pl-10 pr-3 bg-surface-container-low border-[1.5px] border-outline-variant rounded-[14px] text-currency-display font-currency-display text-primary text-xl font-bold tracking-tight focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-secondary-container transition-all" type="text" value="4,200.00"/>
+<span class="absolute right-3 px-2 py-0.5 text-[10px] font-bold rounded-md bg-secondary-container text-primary uppercase tracking-wide">
+                  INR
+                </span>
+</div>
+</div>
+</div>
+<!-- Group, Payer, Date Selectors -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+<!-- Group Selector -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1">In Group</label>
+<div class="relative">
+<select class="w-full h-11 pl-3 pr-8 bg-surface-container-lowest border-[1.5px] border-outline-variant rounded-[14px] text-body-md font-body-md text-on-surface appearance-none focus:border-primary-container focus:outline-none">
+<option selected="">Goa Trip 🌴</option>
+<option>Flatmates #402 🏠</option>
+<option>Weekend Hangouts ☕</option>
+<option>Non-group expense</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-on-surface-variant pointer-events-none text-lg" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+</div>
+<!-- Paid By Selector -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1">Paid by</label>
+<div class="relative">
+<button class="w-full h-11 px-3 bg-surface-container-lowest border-[1.5px] border-outline-variant rounded-[14px] text-body-md font-body-md text-on-surface flex items-center justify-between hover:bg-surface-container-low transition-colors" type="button">
+<div class="flex items-center gap-2 truncate">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-primary font-bold text-xs flex items-center justify-center border border-primary-container">A</span>
+<span class="font-medium text-label-lg font-label-lg text-primary">Alex (You)</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="unfold_more">unfold_more</span>
+</button>
+</div>
+</div>
+<!-- Date Picker -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-1">Date</label>
+<div class="relative">
+<input class="w-full h-11 pl-3 pr-9 bg-surface-container-lowest border-[1.5px] border-outline-variant rounded-[14px] text-body-md font-body-md text-on-surface cursor-pointer" readonly="" type="text" value="Today, Oct 24, 2024"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant text-lg pointer-events-none" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+</div>
+<!-- Category Tags -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Category</label>
+<div class="flex flex-wrap gap-2">
+<!-- Food & Dining (Active) -->
+<button class="px-3.5 py-1.5 rounded-full bg-secondary-container border-[1.5px] border-primary-container text-primary text-label-md font-label-md flex items-center gap-1.5 shadow-xs font-bold transition-transform active:scale-95" type="button">
+<span class="material-symbols-outlined text-base" data-icon="restaurant">restaurant</span>
+<span>Food &amp; Dining</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant hover:border-outline text-on-surface-variant text-label-md font-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="directions_car">directions_car</span>
+<span>Transport</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant hover:border-outline text-on-surface-variant text-label-md font-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="hotel">hotel</span>
+<span>Stay</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant hover:border-outline text-on-surface-variant text-label-md font-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="shopping_basket">shopping_basket</span>
+<span>Groceries</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant hover:border-outline text-on-surface-variant text-label-md font-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="attractions">attractions</span>
+<span>Entertainment</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant hover:border-outline text-on-surface-variant text-label-md font-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="more_horiz">more_horiz</span>
+<span>Other</span>
+</button>
+</div>
+</div>
+</div>
+<!-- SECTION 2: SPLIT METHOD SELECTOR -->
+<div class="border-t border-outline-variant pt-5">
+<div class="flex items-center justify-between mb-2.5">
+<label class="text-label-lg font-label-lg text-primary">Split Method</label>
+<span class="text-body-sm font-body-sm text-on-surface-variant">4 of 5 group members participating</span>
+</div>
+<!-- Segmented Control Tabs -->
+<div class="grid grid-cols-4 p-1 bg-surface-container-high rounded-[16px] border border-outline-variant text-center">
+<!-- Split Equally (Active) -->
+<button class="py-2 rounded-xl bg-surface-container-lowest text-primary font-bold text-label-md font-label-md shadow-xs border border-outline-variant flex items-center justify-center gap-1.5 transition-all" type="button">
+<span class="material-symbols-outlined text-base text-surface-tint" data-icon="equalizer">equalizer</span>
+<span>Split Equally</span>
+</button>
+<!-- Unequal Amounts -->
+<button class="py-2 rounded-xl text-on-surface-variant hover:text-primary font-medium text-label-md font-label-md flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="font-bold text-sm">₹</span>
+<span>Exact Amounts</span>
+</button>
+<!-- Percentages -->
+<button class="py-2 rounded-xl text-on-surface-variant hover:text-primary font-medium text-label-md font-label-md flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="percent">percent</span>
+<span>Percentages</span>
+</button>
+<!-- Shares -->
+<button class="py-2 rounded-xl text-on-surface-variant hover:text-primary font-medium text-label-md font-label-md flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="pie_chart">pie_chart</span>
+<span>By Shares</span>
+</button>
+</div>
+</div>
+<!-- SECTION 3: PARTICIPANT SPLIT CALCULATION & INTERACTIVE PREVIEW -->
+<div class="space-y-3 bg-surface-container-low/50 p-4 rounded-[20px] border border-outline-variant">
+<div class="flex items-center justify-between pb-1">
+<span class="text-label-md font-label-md text-primary">Participants &amp; Share breakdown</span>
+<button class="text-body-sm font-body-sm text-surface-tint hover:underline font-semibold flex items-center gap-1" type="button">
+<span>Select all</span>
+</button>
+</div>
+<!-- Participant Rows -->
+<div class="space-y-2">
+<!-- 1. Alex (You) - Checked -->
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-xs transition-colors hover:border-primary-container/40">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded-md border-outline text-primary-container focus:ring-secondary-container" type="checkbox"/>
+<div class="w-8 h-8 rounded-full bg-secondary-container/70 border border-primary-container/40 flex items-center justify-center font-bold text-primary text-xs">
+                  A
+                </div>
+<div>
+<div class="text-label-md font-label-md text-primary flex items-center gap-1.5">
+                    Alex <span class="text-xs px-1.5 py-0.2 bg-secondary-container rounded font-bold text-primary">You (Payer)</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">1 equal part (25%)</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-currency-sm font-currency-sm text-primary font-bold">₹1,050.00</div>
+<div class="text-[11px] text-surface-tint font-medium">Self payment</div>
+</div>
+</div>
+<!-- 2. Maya Sen - Checked -->
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-xs transition-colors hover:border-primary-container/40">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded-md border-outline text-primary-container focus:ring-secondary-container" type="checkbox"/>
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-primary font-bold text-xs flex items-center justify-center border border-outline-variant">
+                  MS
+                </div>
+<div>
+<div class="text-label-md font-label-md text-primary">Maya Sen</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">1 equal part (25%)</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-currency-sm font-currency-sm text-primary font-bold">₹1,050.00</div>
+<div class="text-[11px] text-on-surface-variant">Owes you</div>
+</div>
+</div>
+<!-- 3. Rahul Verma - Checked -->
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-xs transition-colors hover:border-primary-container/40">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded-md border-outline text-primary-container focus:ring-secondary-container" type="checkbox"/>
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-tertiary font-bold text-xs flex items-center justify-center border border-outline-variant">
+                  RV
+                </div>
+<div>
+<div class="text-label-md font-label-md text-primary">Rahul Verma</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">1 equal part (25%)</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-currency-sm font-currency-sm text-primary font-bold">₹1,050.00</div>
+<div class="text-[11px] text-on-surface-variant">Owes you</div>
+</div>
+</div>
+<!-- 4. Sam Wilson - Checked -->
+<div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-xs transition-colors hover:border-primary-container/40">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded-md border-outline text-primary-container focus:ring-secondary-container" type="checkbox"/>
+<div class="w-8 h-8 rounded-full bg-surface-dim text-primary font-bold text-xs flex items-center justify-center border border-outline-variant">
+                  SW
+                </div>
+<div>
+<div class="text-label-md font-label-md text-primary">Sam Wilson</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">1 equal part (25%)</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-currency-sm font-currency-sm text-primary font-bold">₹1,050.00</div>
+<div class="text-[11px] text-on-surface-variant">Owes you</div>
+</div>
+</div>
+<!-- 5. Priya Patel - UNCHECKED (Excluded) -->
+<div class="flex items-center justify-between p-3 bg-surface-container-low/40 rounded-xl border border-dashed border-outline-variant opacity-70 hover:opacity-100 transition-opacity">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded-md border-outline text-primary-container focus:ring-secondary-container" type="checkbox"/>
+<div class="w-8 h-8 rounded-full bg-surface-dim text-on-surface-variant font-bold text-xs flex items-center justify-center border border-outline-variant">
+                  PP
+                </div>
+<div>
+<div class="text-label-md font-label-md text-on-surface-variant line-through">Priya Patel</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant italic">Excluded from this bill</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-currency-sm font-currency-sm text-on-surface-variant">₹0.00</div>
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-surface-container border border-outline-variant text-on-surface-variant">Opted out</span>
+</div>
+</div>
+</div>
+<!-- Split Summary Banner Callout Box -->
+<div class="mt-4 p-3.5 bg-surface-container-high rounded-[16px] border border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-surface-container-lowest border border-outline-variant flex items-center justify-center text-primary font-bold">
+<span class="material-symbols-outlined text-surface-tint" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg text-primary flex items-center gap-2">
+<span>₹1,050.00 / person</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-surface-container-lowest font-medium border border-outline-variant text-on-surface-variant">Across 4 people</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+                  Alex pays ₹4,200.00 upfront and gets owed <strong class="text-primary font-bold">₹3,150.00</strong> by 3 friends.
+                </div>
+</div>
+</div>
+<div class="hidden sm:block text-right">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest border border-outline-variant text-label-md font-label-md text-surface-tint font-bold">
+<span>Balanced</span>
+<span class="material-symbols-outlined text-sm font-bold" data-icon="done_all">done_all</span>
+</span>
+<div class="text-[11px] text-on-surface-variant mt-0.5">Total ₹4,200.00</div>
+</div>
+</div>
+</div>
+<!-- SECTION 4: OPTIONAL NOTES & RECEIPT UPLOAD -->
+<div class="border-t border-outline-variant pt-4 space-y-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- Receipt Photo Button / Dropzone -->
+<button class="h-14 px-4 bg-surface-container-lowest border-[1.5px] border-dashed border-outline-variant hover:border-primary-container rounded-[14px] flex items-center justify-between text-left transition-colors group" type="button">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="add_a_photo">add_a_photo</span>
+</div>
+<div>
+<div class="text-label-md font-label-md text-primary">Attach receipt photo</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">PNG, JPG or PDF up to 10MB</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="attach_file">attach_file</span>
+</button>
+<!-- Notes Field -->
+<div class="relative">
+<input class="w-full h-14 pl-3.5 pr-4 bg-surface-container-lowest border-[1.5px] border-outline-variant rounded-[14px] text-body-md font-body-md text-on-surface placeholder:text-outline focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-secondary-container transition-all" placeholder="Add optional notes (e.g. Tip included 10%)" type="text"/>
+</div>
+</div>
+</div>
+</form>
+<!-- SECTION 5: MODAL ACTIONS FOOTER -->
+<div class="px-6 py-4 border-t border-outline-variant bg-surface-container-lowest flex flex-col sm:flex-row items-center justify-between gap-3">
+<!-- Microcopy -->
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-surface-tint"></span>
+<span>Instant balance sync with Goa Trip members.</span>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<!-- Discard Button -->
+<button class="flex-1 sm:flex-initial px-5 py-2.5 rounded-[14px] border-[1.5px] border-outline-variant hover:bg-surface-container-high text-primary font-bold text-label-lg font-label-lg transition-colors active:scale-98" type="button">
+            Discard
+          </button>
+<!-- Primary Save CTA -->
+<button class="flex-1 sm:flex-initial px-6 py-2.5 rounded-[14px] bg-primary-container hover:bg-primary text-on-primary font-bold text-label-lg font-label-lg shadow-sm border border-primary-container flex items-center justify-center gap-2 transition-all active:scale-95" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="check">check</span>
+<span>+ Save Expense</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

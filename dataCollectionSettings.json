@@ -1,0 +1,7 @@
+﻿{
+  "interval": "1m",
+  "namespaceFilteringMode": "Include",
+  "namespaces": ["default", "kube-system"],
+  "enableContainerLogV2": false,
+  "streams": ["Microsoft-Perf"]
+}

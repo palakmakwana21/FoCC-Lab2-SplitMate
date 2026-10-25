@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SplitMate - Dashboard</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-background": "#002113",
+            "on-primary": "#ffffff",
+            "outline": "#717970",
+            "primary-fixed-dim": "#96d5a3",
+            "error-container": "#ffdad6",
+            "secondary-container": "#f8e136",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#fbe439",
+            "on-tertiary-fixed": "#131e13",
+            "on-primary-fixed-variant": "#12512c",
+            "on-tertiary-fixed-variant": "#3e4a3c",
+            "inverse-primary": "#96d5a3",
+            "primary": "#003b1b",
+            "on-secondary-container": "#6f6300",
+            "surface": "#e8ffef",
+            "background": "#FAF9F0",
+            "tertiary-fixed-dim": "#bdcab8",
+            "surface-dim": "#bbe3cb",
+            "inverse-on-surface": "#d2fae1",
+            "primary-fixed": "#b1f2be",
+            "tertiary": "#293528",
+            "surface-container-highest": "#c4ecd3",
+            "on-surface-variant": "#404941",
+            "surface-container-high": "#c9f2d9",
+            "primary-container": "#14532d",
+            "surface-container": "#cff7de",
+            "on-secondary-fixed-variant": "#504700",
+            "surface-variant": "#c4ecd3",
+            "secondary-fixed-dim": "#ddc815",
+            "tertiary-container": "#404c3e",
+            "surface-bright": "#e8ffef",
+            "surface-container-low": "#d4fde4",
+            "on-tertiary-container": "#aebcaa",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c0c9be",
+            "on-primary-container": "#87c695",
+            "secondary": "#6a5f00",
+            "surface-tint": "#2e6a41",
+            "on-secondary-fixed": "#201c00",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "on-primary-fixed": "#00210d",
+            "on-surface": "#002113",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#123726",
+            "tertiary-fixed": "#d9e7d4"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1.25rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "gutter": "1.25rem",
+            "space-lg": "1.5rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Manrope", "sans-serif"],
+            "label-md": ["Manrope", "sans-serif"],
+            "display-lg": ["Manrope", "sans-serif"],
+            "currency-display": ["Manrope", "sans-serif"],
+            "headline-sm": ["Manrope", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "currency-sm": ["Manrope", "sans-serif"],
+            "label-lg": ["Manrope", "sans-serif"],
+            "headline-md": ["Manrope", "sans-serif"],
+            "display-lg-mobile": ["Manrope", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "currency-display": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "currency-sm": ["16px", { "lineHeight": "22px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Ambient Forest Tinted Elevation & Custom Utility Nuances */
+    .shadow-forest-ambient {
+      box-shadow: 0 4px 14px rgba(20, 83, 45, 0.06);
+    }
+    .shadow-forest-lg {
+      box-shadow: 0 12px 32px rgba(20, 83, 45, 0.10);
+    }
+    .border-subtle {
+      border: 1.5px solid #E1E3D5;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen font-body-md">
+<!-- ======================================================== -->
+<!-- SIDE NAVIGATION BAR (Anchor Component from JSON)         -->
+<!-- ======================================================== -->
+<aside class="fixed top-0 left-0 h-screen w-60 z-30 bg-surface-container-lowest border-r border-outline-variant shadow-sm flex flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<!-- Brand Header -->
+<div class="flex items-center gap-3 px-2 pt-2">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-secondary-fixed shadow-sm">
+<span class="material-symbols-outlined text-2xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div>
+<span class="font-headline-md text-headline-sm text-primary font-bold tracking-tight block">SplitMate</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block leading-tight">Split Bills. Stay Friends.</span>
+</div>
+</div>
+<!-- Navigation Tabs (6 tabs, 'Dashboard' active) -->
+<nav aria-label="Main Navigation" class="flex flex-col gap-1.5">
+<!-- Dashboard (Active) -->
+<a class="bg-secondary-container text-on-secondary-container font-semibold rounded-xl px-3 py-2 flex items-center gap-3 active:scale-[0.98] transition-transform duration-150" href="#dashboard">
+<span class="material-symbols-outlined text-primary text-xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-lg text-label-lg text-primary font-bold">Dashboard</span>
+</a>
+<!-- My Groups -->
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-medium rounded-xl px-3 py-2 flex items-center gap-3 active:scale-[0.98] transition-transform duration-150" href="#groups">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="font-label-lg text-label-lg">My Groups</span>
+</a>
+<!-- All Expenses -->
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-medium rounded-xl px-3 py-2 flex items-center gap-3 active:scale-[0.98] transition-transform duration-150" href="#expenses">
+<span class="material-symbols-outlined text-xl">receipt_long</span>
+<span class="font-label-lg text-label-lg">All Expenses</span>
+</a>
+<!-- Balances -->
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-medium rounded-xl px-3 py-2 flex items-center gap-3 active:scale-[0.98] transition-transform duration-150" href="#balances">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+<span class="font-label-lg text-label-lg">Balances</span>
+</a>
+<!-- Settlements -->
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-medium rounded-xl px-3 py-2 flex items-center gap-3 active:scale-[0.98] transition-transform duration-150" href="#settlements">
+<span class="material-symbols-outlined text-xl">handshake</span>
+<span class="font-label-lg text-label-lg">Settlements</span>
+</a>
+<!-- Insights -->
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-medium rounded-xl px-3 py-2 flex items-center gap-3 active:scale-[0.98] transition-transform duration-150" href="#insights">
+<span class="material-symbols-outlined text-xl">analytics</span>
+<span class="font-label-lg text-label-lg">Insights</span>
+</a>
+</nav>
+</div>
+<!-- Footer Area (Help & Support, Settings, Profile Card) -->
+<div class="flex flex-col gap-3 pt-4 border-t border-outline-variant">
+<nav aria-label="Secondary Navigation" class="flex flex-col gap-1">
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-medium rounded-xl px-3 py-2 flex items-center gap-3 active:scale-[0.98]" href="#help">
+<span class="material-symbols-outlined text-xl">help</span>
+<span class="font-label-lg text-label-lg">Help &amp; Support</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-medium rounded-xl px-3 py-2 flex items-center gap-3 active:scale-[0.98]" href="#settings">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<!-- Alex Avatar Card -->
+<div class="flex items-center gap-3 p-2 bg-surface-container-low rounded-xl border border-outline-variant">
+<img alt="Alex Profile Photo" class="w-9 h-9 rounded-full object-cover border border-primary-container" data-alt="A clean portrait photo of Alex, a warm smiling young professional wearing a forest-green cotton sweater, well-lit in soft natural morning studio light, high key backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkUnhWpMDeW0ID5R_bGfZ1YAY6JkbMceXXvtHFn1DmBnPHdmN6FA-wH_aT-xahWxy2l-SFUoRm5oxTpXE1qEphq4PqB1hAAuiKp1C7ByDBFR-GXLT106xFb8kOMnQ3DSl5Bi_HoXtGSNSn_Udlo6jBKKCoDYYKMrKUPMmnS5dNiaLLIGLyK0b9__foJkI4FK2pIQ046Rf0pJbV4k4bPbnI3HBJ6cxUqD8wL8Jf8fSyeFyw7W28piYi_Q"/>
+<div class="flex flex-col overflow-hidden">
+<span class="font-label-lg text-label-lg text-primary truncate leading-tight">Alex Morgan</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">alex@splitmate.io</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ======================================================== -->
+<!-- TOP NAVIGATION BAR (Anchor Component from JSON)          -->
+<!-- ======================================================== -->
+<header class="fixed top-0 right-0 left-60 h-16 bg-surface-container-lowest border-b border-outline-variant shadow-sm z-20 flex items-center justify-between px-6">
+<!-- Left: Page Title / Breadcrumb & Search Bar -->
+<div class="flex items-center gap-6 flex-1 max-w-2xl">
+<div class="hidden xl:flex items-center gap-2 text-on-surface-variant font-label-lg text-label-lg">
+<span class="text-on-surface-variant">Pages</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-bold">Dashboard</span>
+</div>
+<!-- Search Input -->
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-xl pointer-events-none">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-xl border-subtle bg-background text-on-surface placeholder:text-outline text-body-md focus:border-primary-container focus:ring-2 focus:ring-secondary-fixed focus:outline-none transition-all" placeholder="Search groups, expenses, or friends..." type="text"/>
+</div>
+</div>
+<!-- Right: Actions & User Avatar -->
+<div class="flex items-center gap-4">
+<!-- Notification Icon with Badge -->
+<button aria-label="Notifications" class="relative p-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
+</button>
+<!-- + Add Expense Primary CTA -->
+<button class="bg-primary-container hover:bg-primary text-secondary-fixed font-label-lg text-label-lg px-4 py-2 rounded-xl flex items-center gap-2 shadow-forest-ambient active:scale-[0.98] transition-transform duration-150 border border-primary" type="button">
+<span class="material-symbols-outlined text-xl">add</span>
+<span>+ Add Expense</span>
+</button>
+<!-- Profile Avatar Thumbnail -->
+<div class="flex items-center pl-2 border-l border-outline-variant">
+<img alt="Alex Profile Photo" class="w-9 h-9 rounded-full object-cover ring-2 ring-secondary-container" data-alt="Close up crop of Alex, clean modern avatar photo with natural aesthetic, gentle green tint background matching SplitMate brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAnkzG7Aqg2B421A1HK5NR_TixetCj7ImeEBeNSNMwP_LXo55_5EnYeyL0gQ1T72olZFdtcINZDFo8DkEivU47AppPKrM3v6ZMkWUd6xVV5WkEjJAcIkQMRHfZ2ZxnETwQvEbAOi7IIwvBwqUlhlRtPgNrt3ieqE22FhXRuz138-Ybd3i5q79NEXjqZDytJ6cGrEb9YFEK5djiZUMuomWsCqseHI6u8p5A_UmjmxDpThwflveOVepotg"/>
+</div>
+</div>
+</header>
+<!-- ======================================================== -->
+<!-- MAIN LEDGER CANVAS                                       -->
+<!-- ======================================================== -->
+<main class="ml-60 pt-20 px-8 pb-12 max-w-[1440px] mx-auto">
+<!-- 1. Welcome Header -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight flex items-center gap-2">
+<span>Hey, Alex!</span>
+<span class="inline-block hover:rotate-12 transition-transform duration-200 cursor-default">👋</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Here's your money situation at a glance.</p>
+</div>
+<!-- Date Tag -->
+<div class="flex items-center gap-2 self-start md:self-auto bg-surface-container-lowest border-subtle px-3.5 py-1.5 rounded-full shadow-forest-ambient">
+<span class="material-symbols-outlined text-primary text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-label-md text-label-md text-primary font-bold">Tuesday, 24 Oct</span>
+</div>
+</section>
+<!-- 2. Hero Balance Section (Asymmetric Bento Grid) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-5 mb-8">
+<!-- Centerpiece Butter-Yellow Card (7 cols) -->
+<div class="lg:col-span-7 bg-secondary-fixed rounded-2xl border border-primary-container p-6 shadow-forest-lg relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+<!-- Ambient Decorative Circles -->
+<div class="absolute -right-8 -top-8 w-44 h-44 bg-secondary-container/40 rounded-full blur-2xl pointer-events-none"></div>
+<div>
+<!-- Header and Badge -->
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md tracking-wider text-primary font-bold uppercase">YOUR NET BALANCE</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container text-secondary-fixed font-label-md text-label-md font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+              You are owed overall
+            </span>
+</div>
+<!-- Massive Balance Ticker -->
+<div class="flex items-baseline gap-2 my-2">
+<span class="font-display-lg text-display-lg text-primary font-extrabold tracking-tight">₹2,450.00</span>
+</div>
+<!-- Status Descriptor -->
+<div class="inline-flex items-center gap-1.5 text-primary font-body-md text-body-md font-semibold">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+<span>You are owed ₹2,450.00 across all active circles</span>
+</div>
+</div>
+<!-- Footer Action & Money Bag Badge -->
+<div class="flex items-center justify-between pt-4 mt-2 border-t border-primary/10">
+<a class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary font-label-lg text-label-lg rounded-xl hover:bg-primary-container active:scale-[0.98] transition-all duration-150" href="#balances">
+<span>View Balances</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+<!-- Friendly Coin/Money Bag Illustration Badge -->
+<div class="w-12 h-12 rounded-2xl bg-primary-container/15 border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">savings</span>
+</div>
+</div>
+</div>
+<!-- Three Accompanying Summary Cards (5 cols stacked) -->
+<div class="lg:col-span-5 flex flex-col gap-3.5">
+<!-- Card 1: Total You Owe -->
+<div class="bg-surface-container-lowest rounded-2xl border-subtle p-4 shadow-forest-ambient flex items-center justify-between hover:bg-background/80 transition-colors">
+<div class="flex items-center gap-3.5">
+<div class="w-11 h-11 rounded-xl bg-error-container/60 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-2xl">arrow_outward</span>
+</div>
+<div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block font-medium">Total You Owe</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-extrabold">₹1,250.00</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-semibold">
+            Across your groups
+          </span>
+</div>
+<!-- Card 2: Total Owed to You -->
+<div class="bg-surface-container-lowest rounded-2xl border-subtle p-4 shadow-forest-ambient flex items-center justify-between hover:bg-background/80 transition-colors">
+<div class="flex items-center gap-3.5">
+<div class="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-2xl">call_received</span>
+</div>
+<div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block font-medium">Total Owed to You</span>
+<span class="font-headline-sm text-headline-sm text-primary font-extrabold">₹3,700.00</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-surface-container text-primary-container font-label-md text-label-md font-semibold">
+            From friends
+          </span>
+</div>
+<!-- Card 3: Active Groups -->
+<div class="bg-surface-container-lowest rounded-2xl border-subtle p-4 shadow-forest-ambient flex items-center justify-between hover:bg-background/80 transition-colors">
+<div class="flex items-center gap-3.5">
+<div class="w-11 h-11 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block font-medium">Active Groups</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-extrabold">4</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-label-md text-label-md font-medium">
+            Trips, home, and friends
+          </span>
+</div>
+</div>
+</section>
+<!-- 3. Quick Actions Row -->
+<section class="mb-8">
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<!-- Quick Action 1 -->
+<button class="bg-surface-container-lowest hover:bg-surface-container-low border-subtle rounded-2xl p-4 shadow-forest-ambient flex items-center gap-3 active:scale-[0.98] transition-all text-left group" type="button">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-xl">add_card</span>
+</div>
+<div>
+<span class="font-label-lg text-label-lg text-primary block font-bold leading-tight">Add Expense</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Log a new receipt</span>
+</div>
+</button>
+<!-- Quick Action 2 -->
+<button class="bg-surface-container-lowest hover:bg-surface-container-low border-subtle rounded-2xl p-4 shadow-forest-ambient flex items-center gap-3 active:scale-[0.98] transition-all text-left group" type="button">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary group-hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-xl">group_add</span>
+</div>
+<div>
+<span class="font-label-lg text-label-lg text-primary block font-bold leading-tight">Create Group</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Trip or flatmate hub</span>
+</div>
+</button>
+<!-- Quick Action 3 -->
+<button class="bg-surface-container-lowest hover:bg-surface-container-low border-subtle rounded-2xl p-4 shadow-forest-ambient flex items-center gap-3 active:scale-[0.98] transition-all text-left group" type="button">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary group-hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-xl">handshake</span>
+</div>
+<div>
+<span class="font-label-lg text-label-lg text-primary block font-bold leading-tight">Settle Up</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pay or request cash</span>
+</div>
+</button>
+<!-- Quick Action 4 -->
+<button class="bg-surface-container-lowest hover:bg-surface-container-low border-subtle rounded-2xl p-4 shadow-forest-ambient flex items-center gap-3 active:scale-[0.98] transition-all text-left group" type="button">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary group-hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+</div>
+<div>
+<span class="font-label-lg text-label-lg text-primary block font-bold leading-tight">View Balances</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Person-by-person list</span>
+</div>
+</button>
+</div>
+</section>
+<!-- 4. Two-Column Grid: Recent Activity & Groups Overview -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column: Recent Activity (6 cols) -->
+<div class="lg:col-span-6 flex flex-col gap-6">
+<div class="bg-surface-container-lowest rounded-2xl border-subtle p-6 shadow-forest-ambient flex flex-col justify-between flex-1">
+<div>
+<!-- Header -->
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-2xl">receipt_long</span>
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">Recent Activity</h2>
+</div>
+<a class="font-label-lg text-label-lg text-primary-container hover:text-primary font-semibold flex items-center gap-1 transition-colors" href="#activity">
+<span>View All</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Activity Rows -->
+<div class="divide-y divide-outline-variant">
+<!-- Item 1 -->
+<div class="py-4 flex items-center justify-between hover:bg-background/50 rounded-xl px-2 -mx-2 transition-colors">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary font-bold">
+<span class="material-symbols-outlined text-xl">restaurant</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface leading-snug">
+<strong class="text-primary font-bold">Alex</strong> added <span class="font-bold text-primary">₹1,200</span> for <span class="text-on-surface">Fisherman's Wharf Dinner</span>
+</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                      Goa Trip • 2h ago
+                    </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-xl">chevron_right</span>
+</div>
+<!-- Item 2 -->
+<div class="py-4 flex items-center justify-between hover:bg-background/50 rounded-xl px-2 -mx-2 transition-colors">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface leading-snug">
+<strong class="text-primary font-bold">Maya</strong> paid <span class="font-bold text-primary">₹850</span> for <span class="text-on-surface">Weekly Groceries</span>
+</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                      Flatmates • Yesterday
+                    </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-xl">chevron_right</span>
+</div>
+<!-- Item 3 -->
+<div class="py-4 flex items-center justify-between hover:bg-background/50 rounded-xl px-2 -mx-2 transition-colors">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-secondary-container/40 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface leading-snug">
+<strong class="text-primary font-bold">Sam</strong> settled <span class="font-bold text-primary-container">₹500</span> with Alex
+                    </p>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                      Direct Payment • 2 days ago
+                    </span>
+</div>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-primary-container font-label-md text-label-md font-semibold">Settled</span>
+</div>
+<!-- Item 4 -->
+<div class="py-4 flex items-center justify-between hover:bg-background/50 rounded-xl px-2 -mx-2 transition-colors">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">two_wheeler</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface leading-snug">
+                      New expense <span class="text-on-surface font-semibold">'Scooter Rentals'</span> added by <strong class="text-primary font-bold">Rahul</strong>
+</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                      Goa Trip • 3 days ago
+                    </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-xl">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Bottom Notice -->
+<div class="mt-4 pt-4 border-t border-outline-variant flex items-center justify-between text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">lock</span> All transactions synced in real-time
+            </span>
+<span class="font-semibold text-primary">Last synced: 5m ago</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Your Groups & Expense Insights Teaser (6 cols) -->
+<div class="lg:col-span-6 flex flex-col gap-6">
+<!-- 'Your Groups' Overview -->
+<div class="bg-surface-container-lowest rounded-2xl border-subtle p-6 shadow-forest-ambient">
+<div class="flex items-center justify-between pb-4 mb-4 border-b border-outline-variant">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-2xl">group</span>
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">Your Groups</h2>
+</div>
+<a class="font-label-lg text-label-lg text-primary-container hover:text-primary font-semibold flex items-center gap-1 transition-colors" href="#groups">
+<span>All 4 Groups</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- 4 Group Cards List -->
+<div class="flex flex-col gap-3">
+<!-- Group 1: Goa Trip -->
+<div class="p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-background/80 transition-all flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-xl">
+                  🌴
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-primary font-bold">Goa Trip</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">5 members</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Total: ₹18,400</span>
+</div>
+</div>
+<div class="flex items-center gap-3 text-right">
+<div>
+<span class="font-label-md text-label-md font-bold text-primary-container block">You are owed</span>
+<span class="font-label-lg text-label-lg font-extrabold text-primary-container">₹1,450.00</span>
+</div>
+<button class="px-3 py-1.5 rounded-xl border border-outline-variant hover:bg-surface-container font-label-md text-label-md text-primary font-bold transition-colors" type="button">
+                  View Group
+                </button>
+</div>
+</div>
+<!-- Group 2: Flatmates #402 -->
+<div class="p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-background/80 transition-all flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-container/30 flex items-center justify-center text-xl">
+                  🏠
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-primary font-bold">Flatmates #402</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">3 members</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Total: ₹34,200</span>
+</div>
+</div>
+<div class="flex items-center gap-3 text-right">
+<div>
+<span class="font-label-md text-label-md font-bold text-error block">You owe</span>
+<span class="font-label-lg text-label-lg font-extrabold text-error">₹600.00</span>
+</div>
+<button class="px-3 py-1.5 rounded-xl border border-outline-variant hover:bg-surface-container font-label-md text-label-md text-primary font-bold transition-colors" type="button">
+                  View Group
+                </button>
+</div>
+</div>
+<!-- Group 3: Weekend Hangouts -->
+<div class="p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-background/80 transition-all flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-xl">
+                  ☕
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-primary font-bold">Weekend Hangouts</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">6 members</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Total: ₹4,800</span>
+</div>
+</div>
+<div class="flex items-center gap-3 text-right">
+<div>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-primary-container font-label-md text-label-md font-semibold inline-block">
+                    Settled up
+                  </span>
+</div>
+<button class="px-3 py-1.5 rounded-xl border border-outline-variant hover:bg-surface-container font-label-md text-label-md text-primary font-bold transition-colors" type="button">
+                  View Group
+                </button>
+</div>
+</div>
+<!-- Group 4: College Reunion -->
+<div class="p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-background/80 transition-all flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed/40 flex items-center justify-center text-xl">
+                  🎓
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-primary font-bold">College Reunion</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">8 members</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Total: ₹12,100</span>
+</div>
+</div>
+<div class="flex items-center gap-3 text-right">
+<div>
+<span class="font-label-md text-label-md font-bold text-primary-container block">You are owed</span>
+<span class="font-label-lg text-label-lg font-extrabold text-primary-container">₹1,600.00</span>
+</div>
+<button class="px-3 py-1.5 rounded-xl border border-outline-variant hover:bg-surface-container font-label-md text-label-md text-primary font-bold transition-colors" type="button">
+                  View Group
+                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Compact Expense Insights Teaser Widget -->
+<div class="bg-surface-container-lowest rounded-2xl border-subtle p-6 shadow-forest-ambient">
+<div class="flex items-center justify-between pb-3 mb-4 border-b border-outline-variant">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-2xl">pie_chart</span>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Monthly Spending Breakdown</h3>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">October 2023</span>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-6">
+<!-- Simulated Donut Ring with Conic Gradient -->
+<div class="relative w-32 h-32 flex-shrink-0 flex items-center justify-center">
+<div class="w-32 h-32 rounded-full" style="background: conic-gradient(#14532D 0% 45%, #2E6A41 45% 75%, #F8E136 75% 90%, #A4C4A8 90% 100%);"></div>
+<div class="absolute w-20 h-20 bg-surface-container-lowest rounded-full flex flex-col items-center justify-center shadow-inner">
+<span class="font-body-sm text-body-sm text-outline">Total</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold leading-tight">₹14.8k</span>
+</div>
+</div>
+<!-- Donut Legend Breakdown -->
+<div class="grid grid-cols-2 gap-3 flex-1 w-full">
+<!-- Food: 45% -->
+<div class="p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-primary-container flex-shrink-0"></span>
+<div class="overflow-hidden">
+<span class="font-label-md text-label-md text-on-surface block truncate">Food &amp; Dinners</span>
+<span class="font-headline-sm text-currency-sm text-primary font-bold">45%</span>
+</div>
+</div>
+<!-- Stays: 30% -->
+<div class="p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-surface-tint flex-shrink-0"></span>
+<div class="overflow-hidden">
+<span class="font-label-md text-label-md text-on-surface block truncate">Stays &amp; Rent</span>
+<span class="font-headline-sm text-currency-sm text-primary font-bold">30%</span>
+</div>
+</div>
+<!-- Travel: 15% -->
+<div class="p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-secondary-container flex-shrink-0"></span>
+<div class="overflow-hidden">
+<span class="font-label-md text-label-md text-on-surface block truncate">Travel &amp; Cabs</span>
+<span class="font-headline-sm text-currency-sm text-primary font-bold">15%</span>
+</div>
+</div>
+<!-- Utilities: 10% -->
+<div class="p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-outline-variant flex-shrink-0"></span>
+<div class="overflow-hidden">
+<span class="font-label-md text-label-md text-on-surface block truncate">Utilities</span>
+<span class="font-headline-sm text-currency-sm text-primary font-bold">10%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>
